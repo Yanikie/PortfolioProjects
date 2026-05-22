@@ -1,6 +1,7 @@
 .pio
 .vscode
 include/secrets.h
+lib/Hey_Porygon_inferencing
 
 # Compiled source #
 ###################
