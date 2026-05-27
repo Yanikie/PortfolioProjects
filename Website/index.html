@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yannick Hogetoorn — Embedded Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <!-- NAV -->
+  <!-- Background Letters-->
+  <div class="animatedBackground"><span>YH</span></div>
+
+  <!-- Navigation Tabs -->
   <nav class="nav" id="nav">
     <div class="nav__logo">YH</div>
     <ul class="nav__links">
@@ -23,23 +24,24 @@
     </button>
   </nav>
 
-  <!-- MOBILE MENU -->
+  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
       <li><a href="#projects" class="mobile-menu__link">Projects</a></li>
       <li><a href="#contact" class="mobile-menu__link">Contact</a></li>
-      <li><a href="#dashboard" class="mobile-menu__link mobile-menu__link--accent">Dashboard</a></li>
+      <li><a href="#dashboard" class="mobile-menu__link">Dashboard</a></li>
     </ul>
   </div>
+
 
   <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero_content">
-      <p class="hero_eyebrow">Embedded Engineering Student</p>
+      <p class="hero_eyebrow">EMBEDDED ENGINEERING STUDENT</p>
       <h1 class="hero_name">Yannick<br><em>Hogetoorn</em></h1></p>
       <div class="hero_cta">
         <a href="#projects" class="btn btn--primary">Projects</a>
-        <a href="#contact" class="btn btn--ghost">Contact me</a>
+        <a href="#contact" class="btn btn--ghost">Contact</a>
       </div>
     </div>
   </section>
@@ -58,13 +60,13 @@
             <h3 class="project-card__title">Autonomous Mobile Platform</h3>
           </div>
           <p class="project-card__desc">
-            Using Gazebo as development software, I together with a team worked towards developing a full autonomous vehicle to which could satisfy the needs of <u><a href="https://www.greendigger.org/">GreenDigger</a></u>
+            Using Gazebo as development software, I together with a team, worked towards developing a full autonomous vehicle to which could satisfy the needs of <u><a href="https://www.greendigger.org/">GreenDigger</a></u>
           </p>
           <div class="project-card__tech">
             <span>Gazebo</span><span>C++</span><span>Python</span><span>Scrum</span>
           </div>
           <div class="project-card__footer">
-            <a href="#" class="project-card__link">View Details →</a>
+            <a href="autonomous.html" class="project-card__link">View Details →</a>
           </div>
         </article>
 
@@ -74,13 +76,13 @@
             <h3 class="project-card__title">Voice Assistent</h3>
           </div>
           <p class="project-card__desc">
-          An ESP 32, local server and some hardware components, I set up a fully local voice assistent for my own use. No cloud, no monthly subscriptions but ask a question and receive an answer.  
+          An ESP 32, local server and some hardware components, I set up a fully local voice assistent for my own use. No cloud, no monthly subscriptions, but ask a question and receive an answer.  
           </p>
           <div class="project-card__tech">
             <span>C++</span><span>Linux</span><span>Hardware</span>
           </div>
           <div class="project-card__footer">
-            <a href="#" class="project-card__link">View Details →</a>
+            <a href="voiceAssistent.html" class="project-card__link">View Details →</a>
           </div>
         </article>
 
@@ -90,13 +92,13 @@
             <h3 class="project-card__title">Customer service analysis</h3>
           </div>
           <p class="project-card__desc">
-            A lot of companies have their customer service on social media but how should your tone be when interacting with these customers. By analysing 2 million customer service tweets and their replies an analysis was found.
+            A lot of companies have their customer service on social media, but how should your tone be when interacting with these customers. By analysing 2 million customer service tweets and their replies an analysis was found.
           </p>
           <div class="project-card__tech">
             <span>Python</span><span>SQL</span><span>Transformers</span><span>Scrum</span>
           </div>
           <div class="project-card__footer">
-            <a href="#" class="project-card__link">View Details →</a>
+            <a href="customerService.html" class="project-card__link">View Details →</a>
           </div>
         </article>
 
@@ -125,18 +127,18 @@
             </a>
           </div>
         </div>
-        <form class="contact__form" id="contactForm">
+        <form class="contact__form" id="contactForm" action="PHP/sendMail.php" method="POST">
           <div class="form-group">
             <label class="form-label" for="name">Name</label>
-            <input class="form-input" type="text" id="name" placeholder="Your name" required />
+            <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required />
           </div>
           <div class="form-group">
             <label class="form-label" for="email">Email</label>
-            <input class="form-input" type="email" id="email" placeholder="your@email.com" required />
+            <input class="form-input" type="email" id="email" name= "email" placeholder="your@email.com" required />
           </div>
           <div class="form-group">
             <label class="form-label" for="message">Message</label>
-            <textarea class="form-input form-textarea" id="message" placeholder="Tell me about your project or question…" required></textarea>
+            <textarea class="form-input form-textarea" id="message" name="message" placeholder="Tell me about your project or question…" required></textarea>
           </div>
           <button type="submit" class="btn btn--primary btn--full">Send Message</button>
           <p class="form-note" id="formNote"></p>
@@ -206,6 +208,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="/js/main.js"></script>
+  <script src="/js/server.js"></script>
 </body>
 </html>
