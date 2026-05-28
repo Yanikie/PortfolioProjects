@@ -1,37 +1,157 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> 
+<html lang="en"> 
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Voice Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/voiceAssistant.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <title>Porygon | Voice Assistant</title> 
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="/css/voiceAssistant.css" /> 
 </head>
-<body>
+<body> 
 <nav class= "nav" id= "pageNavigation">
-    <div class= "navLogo">YH</div> 
-    <ul class= "navigationLinkList">
-        <li><a href= "index.html" class= "navigationLinks">Home</a></li>
-        <li><a href= "index.html#projects"class= "navigationLinks">Projects</a></li>
-        <li><a href= "index.html#contact"class= "navigationLinks">Contact</a></li>
-        <li><a href= "index.html#dashboard"class= "navigationLinks">Dashboard</a></li>
-    </ul>
-    <button class="mobileNavigationIcon" id="navigationIcon" aria-label="Menu"> 
-      <span></span><span></span><span></span>
-    </button>
+  <div class= "navLogo">YH</div> 
+  <ul class= "navigationLinkList">
+      <li><a href= "index.html" class= "navigationLinks">Home</a></li>
+      <li><a href= "#hero" class= "navigationLinks">Overview</a></li>
+      <li><a href= "#embedded"class= "navigationLinks">Embedded</a></li>
+      <li><a href= "#server"class= "navigationLinks">Server</a></li>
+  </ul>
+  <button class="mobileNavigationIcon" id="navBurger" aria-label="Menu"> 
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu"> 
+  <ul> 
+    <li><a href="index.html" class="mobile-menu__link">Home</a></li> 
+    <li><a href="#hero" class= "mobile-menu__link">Overview</a></li>
+    <li><a href="#embedded" class="mobile-menu__link">Embedded</a></li> 
+    <li><a href="#server" class="mobile-menu__link">Server</a></li> 
+  </ul> 
+</div> 
 
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="index.html" class="mobile-menu__link">Home</a></li>
-      <li><a href="index.html#projects" class="mobile-menu__link">Projects</a></li>
-      <li><a href="index.html#contact" class="mobile-menu__link">Contact</a></li>
-      <li><a href="index.html#dashboard" class="mobile-menu__link">Dashboard</a></li>
-    </ul>
+<!-- ============================================================ HERO ============================================================ --> 
+<header class="heroSection" id="hero"> 
+  <div class="heroBackground"></div> 
+  <div class="heroOverlay"></div> 
+  <div class="heroContent container"> 
+    <div class="heroEyebrow"> Voice Assistant</div> 
+    <h1 class="heroTitle"> Porygon </h1>
+    <p class="heroDescription"> A custom voice assistant powered by an ESP32 Lolin D32 module and a dedicated server PC architecture. </p> 
+    <div class="heroStats"> 
+      <a href="#embedded"><div class="heroStatCard"> 
+        <span>Embedded </span>
+      </div> </a> 
+      <a href="#server"><div class="heroStatCard"> 
+        <span>Server</span> 
+      </div> </a>
+    </div> 
+  </div> 
+</header> 
+
+<!-- ============================================================ SECTION 1 ============================================================ --> 
+<section class="section sectionEmbedded" id="embedded"> 
+  <div class="container"> 
+    <div class="sectionHeading"> 
+      <span class="sectionLabel">Physical pod</span> 
+      <h2 class="sectionTitle"> Embedded System Architecture </h2> 
+    </div> 
+    <div class="contentGrid"> 
+      <div class="contentCard"> 
+        <div class="contentCardTop"> 
+          <span class="contentIndex">01</span> 
+          <h3 class="contentTitle">Lolin D32</h3> 
+        </div> 
+        <div class="contentTextbox"> 
+          For the brains I used the Lolin D32. This was simply because 
+          I still had thisboard laying around. If anyone would try to 
+          work the same project, I would recommend them either a similar esp32 
+          board or a board with more RAM. The Specs were enough for what I 
+          needed to do but it's tight.
+        </div> 
+      </div> 
+      <div class="contentCard"> 
+        <div class="contentCardTop"> 
+          <span class="contentIndex">02</span> 
+          <h3 class="contentTitle">Microphone & Speaker</h3> 
+        </div> 
+        <div class="contentTextbox"> 
+          In order for the Porygon to be able to listen to what I am saying
+          I needed a microphone. The INMP441 is often used and was readily
+          available. Most voice assistants are also able to talk back. To 
+          achieve this I chose the MAX98357. This allowed me to use 4-8 ohm
+          speakers, which I still had laying around.
+        </div> 
+      </div> 
+      <div class="contentCard"> 
+        <div class="contentCardTop"> 
+          <span class="contentIndex">03</span> 
+          <h3 class="contentTitle">Edge Impulse</h3>
+        </div> 
+        <div class="contentTextbox"> 
+          There were a couple of options for wake word detection. These 
+          options include ESP-SR, Streaming it, Locally transcribing or
+          Edge Impulse. Edge Impulse took the most time to install but was
+          also best tuned for my application.
+        </div> 
+      </div> 
+    </div> 
+  </div> 
+</section> 
+
+<!-- ============================================================ SECTION 2 ============================================================ --> 
+<section class="section sectionAlt projectSection" id="server"> 
+  <div class="container"> 
+    <div class="sectionHeading"> 
+      <span class="sectionLabel">Software Server</span> 
+      <h2 class="sectionTitle"> Server Structure & Model Logic </h2> 
+    </div> <div class="contentGrid"> <div class="contentCard glassCard"> 
+      <div class="contentCardTop"> <span class="contentIndex">04</span> 
+        <h3 class="contentTitle">SpeachToText</h3> 
+      </div> 
+      <div class="contentTextbox"> 
+        The ESP32 streams the received audio to a tcp port open on my server. 
+        The server needs to translate these bytes to speech so the LLM can 
+        respond. This is done using a Speech To Text algorithm. Since OpenAI 
+        has its Whisper model open for public use, I chose to use this model.
+      </div> 
+    </div> 
+    <div class="contentCard glassCard"> 
+      <div class="contentCardTop"> 
+        <span class="contentIndex">05</span> 
+        <h3 class="contentTitle">Ollama</h3> 
+      </div> 
+      <div class="contentTextbox"> 
+        I personally have a strong disdain towards subscription based services. 
+        This meant that I was not going to API call the big names. Instead I 
+        chose to api call a model I am personally hosting. This means that I 
+        lose some recency but gain a free model. I chose ollama3.1:8b since this 
+        model can run fully on my GPU VRAM.
+      </div> 
+    </div> 
+    <div class="contentCard glassCard"> 
+      <div class="contentCardTop"> 
+        <span class="contentIndex">06</span> 
+        <h3 class="contentTitle">TextToSpeech</h3> 
+      </div> 
+      <div class="contentTextbox"> 
+        The text which is now received from the LLM cannot yet be spoken. The 
+        Text To Speech algorithm is implemented to send the bytes to the ESP.
+        I have chosen to use the Kokoro TTS algorithm. This algorithm is both 
+        fast and has the option for mulitiple different voices. This makes the 
+        voice assistant sound more human.
+      </div> 
+    </div> 
+  </div> 
+</div> 
+</section>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span class="footer__name">Yannick Hogetoorn</span>
+    </div>
   </div>
-
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="/js/server.js"></script>
-</body>
+</footer>
+<script src="/js/server.js"></script> 
+</body> 
 </html>
