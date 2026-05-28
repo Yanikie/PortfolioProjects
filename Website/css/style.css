@@ -309,7 +309,7 @@ ul{list-style: none; }
 }
 
 .btn--ghost {
-  background: transparent;
+  background-color: var(--cream);
   color: var(--body);
   border-color: var(--stone);
 }
