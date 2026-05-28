@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<head>
-</head>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Autonomous Mobile Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autonomous Mobile Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/autonomous.css" />
 </head>
+<body>
+<nav class= "nav" id= "pageNavigation">
+    <div class= "navLogo">YH</div> 
+    <ul class= "navigationLinkList">
+        <li><a href= "index.html" class= "navigationLinks">Home</a></li>
+        <li><a href= "index.html#projects"class= "navigationLinks">Projects</a></li>
+        <li><a href= "index.html#contact"class= "navigationLinks">Contact</a></li>
+        <li><a href= "index.html#dashboard"class= "navigationLinks">Dashboard</a></li>
+    </ul>
+    <button class="mobileNavigationIcon" id="navigationIcon" aria-label="Menu"> 
+      <span></span><span></span><span></span>
+    </button>
+</nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html" class="mobile-menu__link">Home</a></li>
+      <li><a href="index.html#projects" class="mobile-menu__link">Projects</a></li>
+      <li><a href="index.html#contact" class="mobile-menu__link">Contact</a></li>
+      <li><a href="index.html#dashboard" class="mobile-menu__link">Dashboard</a></li>
+    </ul>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="/js/server.js"></script>
+</body>
+</html>
