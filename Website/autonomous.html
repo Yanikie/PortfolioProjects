@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,31 +8,144 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/autonomous.css" />
 </head>
+
 <body>
+
 <nav class= "nav" id= "pageNavigation">
-    <div class= "navLogo">YH</div> 
-    <ul class= "navigationLinkList">
-        <li><a href= "index.html" class= "navigationLinks">Home</a></li>
-        <li><a href= "index.html#projects"class= "navigationLinks">Projects</a></li>
-        <li><a href= "index.html#contact"class= "navigationLinks">Contact</a></li>
-        <li><a href= "index.html#dashboard"class= "navigationLinks">Dashboard</a></li>
-    </ul>
-    <button class="mobileNavigationIcon" id="navigationIcon" aria-label="Menu"> 
-      <span></span><span></span><span></span>
-    </button>
+  <div class= "navLogo">YH</div> 
+  <ul class= "navigationLinkList">
+      <li><a href= "index.html" class= "navigationLinks">Home</a></li>
+      <li><a href= "#"class= "navigationLinks">Overview</a></li>
+      <li><a href= "#objectRecognition"class= "navigationLinks">ObjectRecognition</a></li>
+      <li><a href= "#pathFinding"class= "navigationLinks">Pathfinding</a></li>
+  </ul>
+  <button class="mobileNavigationIcon" id="navBurger" aria-label="Menu"> 
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="index.html" class="mobile-menu__link">Home</a></li>
-      <li><a href="index.html#projects" class="mobile-menu__link">Projects</a></li>
-      <li><a href="index.html#contact" class="mobile-menu__link">Contact</a></li>
-      <li><a href="index.html#dashboard" class="mobile-menu__link">Dashboard</a></li>
-    </ul>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="index.html" class="mobile-menu__link">Home</a></li>
+    <li><a href="#" class="mobile-menu__link">Overview</a></li>
+    <li><a href="#objectRecognition" class="mobile-menu__link">ObjectRecognition</a></li>
+    <li><a href="#pathFinding" class="mobile-menu__link">Pathfinding</a></li>
+  </ul>
+</div>
+
+<!-- === Hero ============================================================ --> 
+<header class="heroSection" id="hero"> 
+
+  <div class="heroBackground"></div>
+  <div class="heroOverlay"></div> 
+  <div class="heroGrid">
+    <svg viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>
   </div>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="/js/server.js"></script>
+  <div class="heroContent container"> 
+    <div class="heroEyebrow"> GreenDigger Collaboration </div> 
+    <h1 class="heroTitle"> Autonomous <em>Mobile Platform</em> </h1>
+    <p class="heroDescription"> Mobilising a platform on a hardpan environment so rainwater can efficiently be caught and used by the soil. </p> 
+    <div class="heroStats"> 
+      <a href="#objectRecognition" class="heroStatCard"> 
+        <span>Object Recognition</span> 
+      </a>
+      <a href="#pathFinding" class="heroStatCard">
+        <span>Pathfinding </span>
+      </a> 
+    </div> 
+  </div> 
+</header> 
+
+<!-- === Object Recognition ============================================================ --> 
+<section class="section" id="objectRecognition">
+  <div class= "container">
+    <div class= "sectionHeading">
+      <div class= "sectionLabel"> OpenCV </div>
+      <h2 class= "sectionTitle"> Object Recognition </h2>
+      <div class= "sectionSubtitle">
+        Using OpenCV functions the image recorded by a depth camera is analysed
+        and used for object detection. This later informs the pathfinding 
+        algorithm.
+      </div>
+    </div>
+    <div class= "contentGrid">
+      <div class= "contentCard">
+        <p class= "contentLabel">Image Alteration</p>
+        <h2 class= "contentTitle">OpenCV Stack</h2>
+        <p class= "contentBody">
+          First the image received from the depthcamera is read. This image is in grayscale and makes it very capable for a Canny edge filter.
+          Using the edited image, bounding boxes are drawn based on the now amplified edges. 
+        </p>
+      </div>
+      <div class= "contentCard">
+        <p class= "contentLabel">Math</p>
+        <h2 class= "contentTitle">Distance</h2>
+        <p class= "contentBody">
+          After the bounding boxes are drawn a calculation can be done based on the view of the camera where the next obstacle is.
+          The result of this calculation is a vector to the next object. Adding this to the position of the AMP at that moment, 
+          results in the real coordinates of the obstacle.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === Pathfinding ============================================================ --> 
+<section class= "section sectionAlt sectionPathfinding" id= "pathFinding">
+<div class= "container">
+  <div class= "sectionHeading">
+    <div class= "sectionLabel"> Start to Goal </div>
+    <h2 class= "sectionTitle"> Pathfinding </h2>
+    <div class= "sectionSubtitle">
+      To drive autonously a route should be determined. In the previous section 
+      possible hinderances could be determined. Now navigating around them is 
+      of the order.
+    </div>
+  </div>
+  <div class= "contentGrid">
+    <div class= "contentCard">
+      <p class= "contentLabel">A*</p>
+      <h2 class= "contentTitle">Why and How?</h2>
+      <p class= "contentBody">
+        GreenDigger supplied a map of where the planned excavation spots would be.
+        Using this, the next goal could be determined and a simple pathfinding 
+        algorithm could be chosen where one start position and one goal was used.
+        Since we know the position of the goal, the heuristicly informed A* was chosen. 
+        This is a fast algorithm which uses heuristic function to plan the best route.
+      </p>
+    </div>
+    <div class= "contentCard">
+      <p class= "contentLabel">PID</p>
+      <h2 class= "contentTitle">Driving</h2>
+      <p class= "contentBody">
+        Now that a path has been generated by the A* algorithm we are able to drive the path it created. 
+        This is done by first turning towards the next vertex and then driving there. This method is chosen 
+        because as little errors as possible can be made using this approach and the machine will not drive large distances.
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footerInner">
+      <div class="footerLogo">YH</div>
+      <p class="footerCopy"> Autonomous Mobile Platform </p>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/server.js"></script>
 </body>
 </html>

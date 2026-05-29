@@ -60,35 +60,8 @@ ul{list-style: none;}
   opacity: 1;
 }
 
+.sectionAlt{background: var(--cream-dark);}
 
-.sectionAlt{
-  background: var(--cream-dark);
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 900px) {
-  .navigationLinkList { display: none; }
-  .mobileNavigationIcon { display: flex; }
-  .about__grid { grid-template-columns: 1fr; }
-  .about__card { position: static; }
-  .projects__grid { grid-template-columns: 1fr; }
-  .project-card--featured { grid-column: 1; }
-  .skills__grid { grid-template-columns: 1fr; }
-  .contact__grid { grid-template-columns: 1fr; }
-  .dashboard__stats { grid-template-columns: 1fr; }
-  .dashboard__charts { grid-template-columns: 1fr; }
-  .chart-card--wide { grid-column: 1; }
-  .footer__inner { flex-direction: column; gap: 8px; text-align: center; }
-}
-
-@media (max-width: 640px) {
-  .container { padding: 0 20px; }
-  .section { padding: 64px 0; }
-  .hero_content { padding: 40px 20px; }
-  .nav { padding: 0 24px; }
-}
 
 /* ============================================================
    Navigation
@@ -257,12 +230,13 @@ nav{
 .heroStats{
   margin-top: 60px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, max-content);
   gap: 20px;
   max-width: 400px;
 }
 
 .heroStatCard{
+  display: flex;
   padding: 14px 30px;
   align-items: center;
   justify-content: center;
@@ -273,7 +247,6 @@ nav{
   box-shadow: var(--shadow-md);
   color: var(--cream);
   font-size: 1.2rem;
-
 }
 
 /* ============================================================
@@ -335,16 +308,13 @@ nav{
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   margin-bottom: 24px;
 }
 
 .contentIndex{
   color: var(--accent);
-
   font-size: 0.92rem;
   font-weight: 500;
-
   letter-spacing: 0.1em;
 }
 
@@ -368,32 +338,32 @@ nav{
 ============================================================ */
 .footer {
   background: var(--heading);
-  color: rgba(250,248,245,0.5);
-  padding: 32px 0;
+  padding: 40px 0;
 }
 
-.footer__inner {
+.footerInner {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.footer__name {
+.footerLogo {
   font-family: var(--decoFont);
-  font-size: 1rem;
-  color: rgba(250,248,245,0.8);
+  font-size: 1.3rem;
+  color: var(--cream);
 }
 
-.footer__copy { font-size: 0.8rem; }
-
-
+.footerCopy {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
 /* ============================================================
    MOBILE
 ============================================================ */
 
 @media (max-width: 980px){
   .contentGrid{grid-template-columns: 1fr;}
-  .heroStats{grid-template-columns: 1fr;  }
+  .heroStats{grid-template-columns: 1fr;}
   .navigationLinkList{display: none;}
   .mobileNavigationIcon{
     display: flex;
@@ -410,9 +380,18 @@ nav{
   }
 }
 
+@media (max-width: 900px) {
+  .navigationLinkList { display: none; }
+  .mobileNavigationIcon { display: flex; }
+  .footerInner { flex-direction: column; gap: 8px; text-align: center; }
+}
+
 @media (max-width: 640px){
   .nav{padding: 0 22px;}
   .heroTitle{font-size: 4rem;}
   .section{padding: 80px 0;}
   .contentCard{padding: 24px;}
+  .container { padding: 0 20px; }
+  .section { padding: 64px 0; }
+  .heroContent { padding: 40px 20px; }
 }
