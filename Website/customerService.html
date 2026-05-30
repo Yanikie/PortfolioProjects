@@ -14,6 +14,7 @@
         <li><a href= "index.html" class= "navigationLinks">Home</a></li>
         <li><a href= "#overview"class= "navigationLinks">Overview</a></li>
         <li><a href= "#methodology"class= "navigationLinks">Methodology</a></li>
+        <li><a href= "#businessIdea" class= "navigationLinks">Business Idea</a></li>
         <li><a href= "#findings"class= "navigationLinks">Findings</a></li>
         <li><a href= "#recommendation"class= "navigationLinks">Recommendation</a></li>
     </ul>
@@ -27,255 +28,275 @@
     <li><a href= "index.html" class= "mobile-menu__link">Home</a></li>
     <li><a href= "#overview"class= "mobile-menu__link">Overview</a></li>
     <li><a href= "#methodology"class= "mobile-menu__link">Methodology</a></li>
+    <li><a href= "#businessIdea" class= "mobile-menu__link">Business Idea</a></li>
     <li><a href= "#findings"class= "mobile-menu__link">Findings</a></li>
     <li><a href= "#recommendation"class= "mobile-menu__link">Recommendation</a></li>
   </ul>
 </div>
 
 
-<!-- ── HERO (dark band) ── -->
-<div id="hero">
-  <div class="heroInner">
+<!-- === Hero ============================================================ --> 
+<div class="heroSection" id="hero">
+  <div class= "heroBackground"></div>
+  <div class= "heroOverlay"></div>
+  <div class="heroBubbles">
+    <div class="bubble b1"><div class="bubble-header"><div class="bubble-avatar"></div><div><div class="bubble-name"></div><div class="bubble-handle"></div></div></div><div class="bubble-line"></div><div class="bubble-line short"></div></div>
+    <div class="bubble b2"><div class="bubble-header"><div class="bubble-avatar"></div><div><div class="bubble-name"></div><div class="bubble-handle"></div></div></div><div class="bubble-line short"></div></div>
+    <div class="bubble b3"><div class="bubble-header"><div class="bubble-avatar"></div><div><div class="bubble-name"></div><div class="bubble-handle"></div></div></div><div class="bubble-line"></div><div class="bubble-line short"></div></div>
+    <div class="bubble b4"><div class="bubble-header"><div class="bubble-avatar"></div><div><div class="bubble-name"></div><div class="bubble-handle"></div></div></div><div class="bubble-line"></div><div class="bubble-line"></div></div>
+    <div class="bubble b5"><div class="bubble-header"><div class="bubble-avatar"></div><div><div class="bubble-name"></div><div class="bubble-handle"></div></div></div><div class="bubble-line short"></div></div>
+    <div class="bubble b6"><div class="bubble-header"><div class="bubble-avatar"></div><div><div class="bubble-name"></div><div class="bubble-handle"></div></div></div><div class="bubble-line"></div><div class="bubble-line short"></div></div>
+    <div class="bubble b7"><div class="bubble-header"><div class="bubble-avatar"></div><div><div class="bubble-name"></div><div class="bubble-handle"></div></div></div><div class="bubble-line"></div></div>
+    <div class="bubble b8"><div class="bubble-header"><div class="bubble-avatar"></div><div><div class="bubble-name"></div><div class="bubble-handle"></div></div></div><div class="bubble-line short"></div></div>
+  </div>
+
+  <div class="heroContent container">
     <span class="heroEyebrow">Data Challenge</span>
     <h1 class="heroTitle">Enhancing <em>customer service</em></h1>
-    <p class="heroSub">
+    <p class="heroDescription">
       Evaluating American Air's Twitter customer service performance by comparing tweet sentiment
-      and formality against competitors and providing data-driven recommendations.
+      and formality against competitors while providing a data-driven recommendations.
     </p>
-    <div class="heroBtnRow">
-      <a href="#methodology" class="btnPrimary">Methodology</a>
-      <a href="#findings" class="btnGhost">Key Findings</a>
-      <a href="#recommendation" class="btnGhost">Recommendation</a>
+    <div class= "heroStats">
+      <a href= "#overview" class= "heroStatCard">Overview</a>
+      <a href= "#methodology" class= "heroStatCard">Methodology</a>
+      <a href= "#businessIdea" class= "heroStatCard">Business Idea</a>
+      <a href= "#findings" class= "heroStatCard">Findings</a>
+      <a href= "#recommendation" class= "heroStatCard">Recommendation</a>
     </div>
   </div>
 </div>
 
-<!-- ── OVERVIEW (cream) ── -->
-<div class="bandCream" id="overview">
-  <div class="section">
-    <span class="sectionTag">Overview</span>
-    <h2 class="sectionTitle">The <em>aim</em> of the project</h2>
-    <p class="sectionBody">
-      The aim of this project is to evaluate American Air and their Twitter Team's customer service
-      performance. We compare them with competitors and run analysis on tweets from both the airline
-      and their customers. We also provide advice on how they should improve their team.
-    </p>
-    <p class="sectionBody">
-      Our goal is to find out whether American Air improves or worsens customer emotion within the tweet.
-      Additionally, we chose to analyse the Twitter Team's formality in their tweets and whether that
-      has an impact on customer emotion.
-    </p>
-    <div class="statRow">
-      <div class="statCell">
-        <span class="statVal">2M+</span>
-        <span class="statLbl">Tweets analysed</span>
-      </div>
-      <div class="statCell">
-        <span class="statVal">9</span>
-        <span class="statLbl">Airlines compared</span>
-      </div>
-      <div class="statCell">
-        <span class="statVal">78.8%</span>
-        <span class="statLbl">Model accuracy</span>
-      </div>
-      <div class="statCell">
-        <span class="statVal">0.227</span>
-        <span class="statLbl">Avg sentiment evolution</span>
-      </div>
-      <div class="statCell">
-        <span class="statVal">500</span>
-        <span class="statLbl">Hand-labelled tweets</span>
-      </div>
+<!-- === Overview ============================================================ --> 
+<div class="section" id="overview">
+  <div class= "container">
+  <div class= "sectionHeading">
+  <span class="sectionLabel">Overview</span>
+  <h2 class="sectionTitle">The <em>aim</em> of the project</h2>
+  </div>
+  <p class="sectionBody">
+    The aim of this project is to evaluate American Air and their Twitter Team's customer service
+    performance. We compare them with competitors and run analysis on tweets from both the airline
+    and their customers. We also provide advice on how they should improve their team.
+  </p>
+  <p class="sectionBody">
+    Our goal is to find out whether American Air improves or worsens customer emotion within the conversation thread.
+    Additionally, we chose to analyse the Twitter Team's formality in their tweets and whether this
+    has an impact on customer emotion.
+  </p>
+  <div class="statRow">
+    <div class="statCell">
+      <span class="statVal">2M+</span>
+      <span class="statLbl">Tweets analysed</span>
     </div>
+    <div class="statCell">
+      <span class="statVal">9</span>
+      <span class="statLbl">Airlines compared</span>
+    </div>
+    <div class="statCell">
+      <span class="statVal">78.8%</span>
+      <span class="statLbl">Model accuracy</span>
+    </div>
+    <div class="statCell">
+      <span class="statVal">+0.227</span>
+      <span class="statLbl">Avg sentiment evolution</span>
+    </div>
+    <div class="statCell">
+      <span class="statVal">500</span>
+      <span class="statLbl">Hand-labelled tweets</span>
+    </div>
+  </div>
   </div>
 </div>
 
-<hr class="divider"/>
 
-<!-- ── METHODOLOGY (cream-dark) ── -->
-<div class="bandCreamDark" id="methodology">
-  <div class="section">
-    <span class="sectionTag">Methodology</span>
-    <h2 class="sectionTitle">Data pipeline <em>&amp; approach</em></h2>
-    <p class="sectionBody">
-      The project followed a structured pipeline from raw data through to business recommendations.
-      Two parallel tracks ran simultaneously: sentiment analysis and formality analysis.
-    </p>
-    <div class="stepList">
-      <div class="step">
-        <span class="stepNum">01</span>
-        <div class="stepContent">
-          <div class="stepTitle">Data Cleaning</div>
-          <div class="stepBody">Removed tweets with no relevant information. Removed non-English tweets. Kept all airline data. Split into Part 1 and Part 2 cleaning passes.</div>
-        </div>
-      </div>
-      <div class="step">
-        <span class="stepNum">02</span>
-        <div class="stepContent">
-          <div class="stepTitle">Databases</div>
-          <div class="stepBody">Relational databases store data in a structured manner using tables that work well with large datasets of this scale.</div>
-        </div>
-      </div>
-      <div class="step">
-        <span class="stepNum">03</span>
-        <div class="stepContent">
-          <div class="stepTitle">Conversations</div>
-          <div class="stepBody">Created a new table grouping all tweets into conversations. English only, minimum 2 tweets by 2 different users. A conversation ends when the problem is solved or the customer is redirected. A second customer reply under a first customer message is treated as a separate conversation.</div>
-        </div>
-      </div>
-      <div class="step">
-        <span class="stepNum">04</span>
-        <div class="stepContent">
-          <div class="stepTitle">Sentiment Analysis</div>
-          <div class="stepBody">Used models (e.g. ChatGPT) to give a label for the general emotion of each tweet. Evaluated the model by comparing its output to our manual labelling of 500 tweets.</div>
-        </div>
-      </div>
-      <div class="step">
-        <span class="stepNum">05</span>
-        <div class="stepContent">
-          <div class="stepTitle">Formality Analysis</div>
-          <div class="stepBody">A pretrained formality model rates tweet text on a scale of 0 (informal) to 1 (formal). Evaluated the same way as sentiment analysis — validated against 500 hand-labelled tweets. Achieved 78.7% accuracy.</div>
-        </div>
-      </div>
-      <div class="step">
-        <span class="stepNum">06</span>
-        <div class="stepContent">
-          <div class="stepTitle">Sentiment Evolution</div>
-          <div class="stepBody">Defined as the change of customer sentiment between the first and last tweet of a conversation. At least one airline response should be in between. Score ranges from −2 (decreasing) to +2 (increasing).</div>
-        </div>
+<!-- === Overview ============================================================ --> 
+<div class="section sectionAlt" id="methodology">
+  <div class= "container"> 
+  <div class= "sectionHeading">
+  <span class="sectionLabel">Methodology</span>
+  <h2 class="sectionTitle">Data pipeline <em>&amp; approach</em></h2>
+  </div>
+  <p class="sectionBody">
+    The project followed a structured pipeline from raw data through to business recommendations.
+    Two parallel tracks ran simultaneously: sentiment analysis and formality analysis.
+  </p>
+  <div class="stepList">
+    <div class="step">
+      <span class="stepNum">01</span>
+      <div class="stepContent">
+        <div class="stepTitle">Data Cleaning</div>
+        <div class="stepBody">Removed tweets with no relevant information. Removed non-English tweets. Kept all relevant airline data.</div>
       </div>
     </div>
-    <div class="cardGrid">
-      <div class="card">
-        <span class="cardTag">Business Idea · Formality</span>
-        <div class="cardTitle">Analyse formality effect</div>
-        <div class="cardBody">Analyse the effect the formality of tweets has on customer sentiment evolution. Research shows a link between formality and message effectiveness.</div>
+    <div class="step">
+      <span class="stepNum">02</span>
+      <div class="stepContent">
+        <div class="stepTitle">Databases</div>
+        <div class="stepBody">An SQL based database stores data in a structured manner using tables that work well with large datasets of this scale.</div>
       </div>
-      <div class="card">
-        <span class="cardTag">Model Evaluation</span>
-        <div class="cardTitle">Confusion matrix validation</div>
-        <div class="cardBody">Both the sentiment and formality models were validated using confusion matrices comparing model output against manual labels of 500 tweets.</div>
+    </div>
+    <div class="step">
+      <span class="stepNum">03</span>
+      <div class="stepContent">
+        <div class="stepTitle">Define Conversation</div>
+        <div class="stepBody">Before an analysis could be made about the effect of a conversation, a definition of what a conversation is had to be made. The definition we arrived to was an entirely english conversation between a minimum of two users longer than at least 2 tweets.</div>
       </div>
-      <div class="card">
-        <span class="cardTag">Output</span>
-        <div class="cardTitle">Recommendation</div>
-        <div class="cardBody">All previous parts feed into a concrete recommendation for the customer service of American Air, grounded in empirical findings.</div>
+    </div>
+    <div class="step">
+      <span class="stepNum">04</span>
+      <div class="stepContent">
+        <div class="stepTitle">Analysing Conversations</div>
+        <div class="stepBody">A conversation is viewed as complete when a problem is solved or redirected. The difference between sentiment from the first to the last message is of importance.</div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="stepNum">05</span>
+      <div class="stepContent">
+        <div class="stepTitle">Sentiment Analysis</div>
+        <div class="stepBody">Used language models to give a label for the general emotion of each tweet. To determine the quality of the model we compared its output to our manual labelling of 500 tweets.</div>
+      </div>
+    </div>
+    <div class="step">
+      <span class="stepNum">06</span>
+      <div class="stepContent">
+        <div class="stepTitle">Formality Analysis</div>
+        <div class="stepBody">A pretrained formality model rates tweet text on a scale of 0 (informal) to 1 (formal). Evaluated the same way as sentiment analysis — validated against 500 hand-labelled tweets. The model achieved a 78.7% accuracy.</div>
       </div>
     </div>
   </div>
-</div>
-
-<hr class="divider"/>
-
-<!-- ── BUSINESS IDEA (cream) ── -->
-<div class="bandCream" id="businessIdea">
-  <div class="section">
-    <span class="sectionTag">Business Idea Integration</span>
-    <h2 class="sectionTitle">Does <em>formality</em> drive sentiment?</h2>
-    <p class="sectionBody">
-      Research has shown that there is a link between formality and the effectiveness of a message, and
-      that there might be a level of formality which improves the tone. This gave us a reason to look into
-      whether higher formality would lead to an improvement in customer sentiment evolution and if American
-      Air can profit from an improvement in their tweet formality.
-    </p>
-    <div class="findingTable" style="margin-top:2.5rem;">
-      <div class="findingRow">
-        <div class="findingKey">Scatter Plot</div>
-        <div class="findingVal">Shows sentiment evolution and formality scores for all airlines. Sentiments cluster at specific values (−2.0, −1.0, 0.0, 1.0, 2.0), while formality scores vary widely across the 0–1 range.</div>
-      </div>
-      <div class="findingRow">
-        <div class="findingKey">Box Plot</div>
-        <div class="findingVal">With the <strong>third lowest formality score</strong>, American Air's tweets are less formal than most competitors. This introduced the idea that increasing formality could improve sentiment evolution.</div>
-      </div>
-      <div class="findingRow">
-        <div class="findingKey">Formality Scale</div>
-        <div class="findingVal">Model rates tweet text on a scale of <strong>0 (informal)</strong> to <strong>1 (formal)</strong>. Accuracy of 78.7% — an acceptable level, meaning we can rely on the outcome.</div>
-      </div>
+  <div class="cardGrid">
+    <div class="card">
+      <span class="cardTag">Business Idea</span>
+      <div class="cardTitle">Analyse formality effect</div>
+      <div class="cardBody">Analyse the effect the formality of tweets has on customer sentiment evolution. Research shows a link between formality and message effectiveness.</div>
     </div>
+    <div class="card">
+      <span class="cardTag">Model Evaluation</span>
+      <div class="cardTitle">Confusion matrix validation</div>
+      <div class="cardBody">Both the sentiment and formality models were validated using confusion matrices comparing model output against manual labels of 500 tweets.</div>
+    </div>
+    <div class="card">
+      <span class="cardTag">Output</span>
+      <div class="cardTitle">Recommendation</div>
+      <div class="cardBody">All previous parts feed into a concrete recommendation for the customer service of American Air, grounded in empirical findings.</div>
+    </div>
+  </div>
   </div>
 </div>
 
-<hr class="divider"/>
-
-<!-- ── FINDINGS (cream-dark) ── -->
-<div class="bandCreamDark" id="findings">
-  <div class="section">
-    <span class="sectionTag">Key Findings</span>
-    <h2 class="sectionTitle">What the <em>data</em> revealed</h2>
-    <p class="sectionBody">
-      Analysis of formality ranges and their corresponding average sentiment evolution scores yielded
-      clear, actionable insights about the sweet spot for tweet formality.
-    </p>
-    <div class="findingTable">
-      <div class="findingRow">
-        <div class="findingKey">Formality 0.0 – 0.2</div>
-        <div class="findingVal">Very low sentiment evolution score of <strong>0.0576</strong>. Highly informal tweets correlate with barely any positive change in customer emotion.</div>
-      </div>
-      <div class="findingRow">
-        <div class="findingKey">Formality 0.6 – 0.8</div>
-        <div class="findingVal">Significantly higher sentiment evolution score of <strong>0.2547</strong>. A moderate-to-high formality range shows meaningful improvement in customer sentiment.</div>
-      </div>
-      <div class="findingRow">
-        <div class="findingKey">Formality 0.8 – 1.0</div>
-        <div class="findingVal">Sentiment evolution at <strong>0.2452</strong> — diminishing returns. Overly formal tweets risk sounding robotic. American Air is advised <strong>not to go overboard</strong>.</div>
-      </div>
-      <div class="findingRow">
-        <div class="findingKey">Key Conclusion</div>
-        <div class="findingVal"><strong>Higher formality within tweets had a positive effect on sentiment evolution.</strong> The optimal range appears to be 0.6–0.8 — formal enough to be professional, natural enough to feel human.</div>
-      </div>
-      <div class="findingRow">
-        <div class="findingKey">American Air</div>
-        <div class="findingVal">Average sentiment evolution of <strong>0.227</strong>. Overall slightly improved customer sentiment, but with 3rd lowest formality among airlines, there is substantial room to improve.</div>
-      </div>
+<!-- === Business Idea ============================================================ --> 
+<div class="section" id= "businessIdea">
+  <div class= "container">
+  <div class= "sectionHeading">
+  <span class="sectionLabel">Business Idea Integration</span>
+  <h2 class="sectionTitle">Does <em>formality</em> drive sentiment?</h2>
+  </div>
+  <p class="sectionBody">
+    Research has shown that there is a link between formality and the effectiveness of a message, and
+    that there might be a level of formality which improves the tone. This gave us a reason to look into
+    whether higher formality would lead to an improvement in customer sentiment evolution and if American
+    Air can profit from an improvement in their tweet formality.
+  </p>
+  <div class="findingTable" style="margin-top:2.5rem;">
+    <div class="findingRow">
+      <div class="findingKey">Scatter Plot</div>
+      <div class="findingVal">Shows sentiment evolution and formality scores for all airlines. Sentiments cluster at specific values (−2.0, −1.0, 0.0, 1.0, 2.0), while formality scores vary widely across the 0–1 range.</div>
     </div>
+    <div class="findingRow">
+      <div class="findingKey">Box Plot</div>
+      <div class="findingVal">With the <strong>third lowest formality score</strong>, American Air's tweets are less formal than most competitors. This introduced the idea that increasing formality could improve sentiment evolution.</div>
+    </div>
+    <div class="findingRow">
+      <div class="findingKey">Formality Scale</div>
+      <div class="findingVal">Model rates tweet text on a scale of <strong>0 (informal)</strong> to <strong>1 (formal)</strong>. Accuracy of 78.7% — an acceptable level, meaning we can rely on the outcome.</div>
+    </div>
+  </div>
   </div>
 </div>
 
-<hr class="divider"/>
 
-<!-- ── RECOMMENDATION (cream) ── -->
-<div class="bandCream" id="recommendation">
-  <div class="section">
-    <span class="sectionTag">Recommendation</span>
-    <h2 class="sectionTitle">What American Air <em>should do</em></h2>
-    <div class="recBlock">
-      <div class="recHead">
-        <span class="recHeadTitle">Overall verdict</span>
-        <span class="recBadge">Keep the Twitter Team</span>
-      </div>
-      <div class="recBody">
-        <p>
-          The American Air Twitter Team had an average sentiment evolution score of <strong>0.227</strong>,
-          meaning they overall slightly increased the sentiment of their customers. We also found that
-          higher formality leads to a better score.
-        </p>
-        <p>
-          With American Air having the 3rd lowest formality there is plenty of room for improvement.
-          Therefore, we believe <strong>the Twitter Team should be kept</strong> and guided towards a more
-          consistently formal communication style — without tipping into robotic territory.
-        </p>
-      </div>
-      <div class="recCols">
-        <div class="recCol">
-          <div class="recColHead">Twitter Team Improvements</div>
-          <div class="recColBody">
-            <p><strong>Training and Development:</strong> Implement training programs to guide the Twitter Team on writing more formal responses to customers whilst ensuring it does not sound robotic. This will help achieve a higher sentiment evolution score.</p>
-            <p><strong>Consistency in Communication:</strong> Maintaining a consistent level of formality across all interactions will help uphold a professional and reliable brand image.</p>
-          </div>
+<!-- === Findings ============================================================ --> 
+
+<div class="section sectionAlt" id="findings">
+  <div class= "container">
+  <div class= "sectionHeading">
+  <span class="sectionLabel">Key Findings</span>
+  <h2 class="sectionTitle">What the <em>data</em> revealed</h2>
+  </div>
+  <p class="sectionBody">
+    Analysis of formality ranges and their corresponding average sentiment evolution scores yielded
+    clear, actionable insights about the sweet spot for tweet formality.
+  </p>
+  <div class="findingTable">
+    <div class="findingRow">
+      <div class="findingKey">Formality 0.0 – 0.2</div>
+      <div class="findingVal">Very low sentiment evolution score of <strong>0.0576</strong>. Highly informal tweets correlate with barely any positive change in customer emotion.</div>
+    </div>
+    <div class="findingRow">
+      <div class="findingKey">Formality 0.6 – 0.8</div>
+      <div class="findingVal">Significantly higher sentiment evolution score of <strong>0.2547</strong>. A moderate-to-high formality range shows meaningful improvement in customer sentiment.</div>
+    </div>
+    <div class="findingRow">
+      <div class="findingKey">Formality 0.8 – 1.0</div>
+      <div class="findingVal">Sentiment evolution at <strong>0.2452</strong> — diminishing returns. Overly formal tweets risk sounding robotic. American Air is advised <strong>not to go overboard</strong>.</div>
+    </div>
+    <div class="findingRow">
+      <div class="findingKey">Key Conclusion</div>
+      <div class="findingVal"><strong>Higher formality within tweets had a positive effect on sentiment evolution.</strong> The optimal range appears to be 0.6–0.8 — formal enough to be professional, natural enough to feel human.</div>
+    </div>
+    <div class="findingRow">
+      <div class="findingKey">American Air</div>
+      <div class="findingVal">Average sentiment evolution of <strong>0.227</strong>. Overall slightly improved customer sentiment, but with 3rd lowest formality among airlines, there is substantial room to improve.</div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<!-- === Recommendation ============================================================ --> 
+<div class="section" id="recommendation">
+  <div class= "container">
+  <div class= "sectionHeading">
+  <span class="sectionLabel">Recommendation</span>
+  <h2 class="sectionTitle">What American Air <em>should do</em></h2>
+  </div>
+  <div class="recBlock">
+    <div class="recHead">
+      <span class="recHeadTitle">Overall verdict</span>
+    </div>
+    <div class="recBody">
+      <p>
+        The American Air Twitter Team had an average sentiment evolution score of <strong>0.227</strong>,
+        meaning they overall slightly increased the sentiment of their customers. We also found that
+        higher formality leads to a better score.
+      </p>
+      <p>
+        With American Air having the 3rd lowest formality there is plenty of room for improvement.
+        Therefore, we believe <strong>the Twitter Team should be kept</strong> and guided towards a more
+        consistently formal communication style — without tipping into robotic territory.
+      </p>
+    </div>
+    <div class="recCols">
+      <div class="recCol">
+        <div class="recColHead">Twitter Team Improvements</div>
+        <div class="recColBody">
+          <p><strong>Training and Development:</strong> Implement training programs to guide the Twitter Team on writing more formal responses to customers whilst ensuring it does not sound robotic. This will help achieve a higher sentiment evolution score.</p>
+          <p><strong>Consistency in Communication:</strong> Maintaining a consistent level of formality across all interactions will help uphold a professional and reliable brand image.</p>
         </div>
-        <div class="recCol">
-          <div class="recColHead">Fly High Project Improvements</div>
-          <div class="recColBody">
-            <p><strong>Time efficiency</strong> could have been improved by using a different database platform — putting conversations into tables took 16 hours. Running code locally instead of online for sentiment and formality analysis would also deliver results faster.</p>
-            <p><strong>Accuracy</strong> of results could be improved by altering the model to be more suitable for the project. An accuracy of 78.8% has room for error and could hinder the analysis provided to the company.</p>
-          </div>
+      </div>
+      <div class="recCol">
+        <div class="recColHead">Fly High Project Improvements</div>
+        <div class="recColBody">
+          <p><strong>Time efficiency</strong> could have been improved by using a different database platform — putting conversations into tables took 16 hours. Running code locally instead of online for sentiment and formality analysis would also deliver results faster.</p>
+          <p><strong>Accuracy</strong> of results could be improved by altering the model to be more suitable for the project. An accuracy of 78.8% has room for error and could hinder the analysis provided to the company.</p>
         </div>
       </div>
     </div>
   </div>
+  </div>
 </div>
 
-<!-- ── FOOTER (black) ── -->
+<!-- === Footer ============================================================ --> 
 <footer class="footer">
   <div class="container">
     <div class="footerInner">

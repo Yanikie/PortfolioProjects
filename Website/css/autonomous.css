@@ -218,7 +218,7 @@ nav{
   letter-spacing: 0.03em;
   font-family: var(--decoFont);
   font-size: clamp(3.5rem, 9vw, 6.5rem);
-  line-height: 0.92;
+  line-height: 0.9;
   color: var(--cream-dark);
   margin-bottom: 28px;
 }
@@ -388,7 +388,7 @@ nav{
 }
 
 @media (max-width: 900px) {
-  .footer__inner { flex-direction: column; gap: 8px; text-align: center; }
+  .footerInner { flex-direction: column; gap: 8px; text-align: center; }
 }
 
 @media (max-width: 640px) {
