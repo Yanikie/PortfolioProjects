@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yannick Hogetoorn — Embedded Engineer</title>
+  <meta name="description" content= "I am Yannick Hogetoorn. Read more about my projects, contact or dashboard here!"/>
+  <link rel="canonical" href="https://hogetoorn.com/">
+  <title>Who Am I | Yannick Hogetoorn</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
 </head>
@@ -128,7 +130,7 @@
             </a>
           </div>
         </div>
-        <form class="contact__form" id="contactForm" action="PHP/sendMail.php" method="POST">
+        <form class="contact__form" id="contactForm">
           <div class="form-group">
             <label class="form-label" for="name">Name</label>
             <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required />
@@ -209,6 +211,43 @@
     </div>
   </footer>
 
+<script>
+  // Fetch the CSRF token when the page loads
+  fetch('PHP/sendMail.php?csrf=1')
+    .then(r => r.json())
+    .then(d => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'csrf_token';
+      input.value = d.token;
+      document.getElementById('contactForm').appendChild(input);
+    });
+
+  // Intercept the form submit and send it in the background
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // stop the browser navigating to sendMail.php
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    fetch('PHP/sendMail.php', {
+      method: 'POST',
+      body: data,
+    })
+    .then(r => {
+      // PHP redirects to index.html?mail=success or ?mail=failed
+      // r.url is where it ended up after following the redirect
+      if (r.url.includes('mail=success')) {
+        window.location.href = 'index.html?mail=success';
+      } else {
+        window.location.href = 'index.html?mail=failed';
+      }
+    })
+    .catch(() => {
+      window.location.href = 'index.html?mail=failed';
+    });
+  });
+</script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="/js/server.js"></script>
 </body>

@@ -25,6 +25,50 @@
     return { min: Math.min(...arr), max: Math.max(...arr) };
   }
 
+  // ── Response shape validation ─────────────────────────────────────────────
+  // Checks that the API returned the exact structure the dashboard expects.
+  // Returns true if everything looks right, false if something is wrong or
+  // unexpected (e.g. a DB error leaked into the JSON, a CDN returned its own
+  // error page as JSON, or someone tampered with the response in transit).
+  function isValidResponse(data) {
+    if (typeof data !== 'object' || data === null) return false;
+    if (data.ok !== true) return false;
+
+    // No readings yet is fine — the caller handles this separately
+    if (data.latest === null) return true;
+
+    // latest must be a well-formed reading object
+    const l = data.latest;
+    if (typeof l !== 'object' || l === null)             return false;
+    if (typeof l.recorded_at  !== 'number')              return false;
+    if (typeof l.temperature  !== 'number')              return false;
+    if (typeof l.humidity     !== 'number')              return false;
+    if (typeof l.pressure     !== 'number')              return false;
+
+    // series must be an object with four arrays of equal length
+    const s = data.series;
+    if (typeof s !== 'object' || s === null)             return false;
+
+    const arrays = ['timestamps', 'temperatures', 'humidities', 'pressures'];
+    for (const key of arrays) {
+      if (!Array.isArray(s[key])) return false;
+    }
+
+    const len = s.timestamps.length;
+    if (
+      s.temperatures.length !== len ||
+      s.humidities.length   !== len ||
+      s.pressures.length    !== len
+    ) return false;
+
+    // Every value in every series array must be a number
+    for (const key of arrays) {
+      if (!s[key].every(v => typeof v === 'number')) return false;
+    }
+
+    return true;
+  }
+
   // ── Build / update a Chart.js line chart ────────────────────────────────────
   function makeChart(canvasId, labels, data, color, yLabel) {
     const ctx = $(canvasId).getContext('2d');
@@ -80,7 +124,14 @@
       return;
     }
 
-    if (!data.ok || !data.latest) {
+    // Validate the shape of the response before touching the DOM
+    if (!isValidResponse(data)) {
+      $('dataSource').textContent = 'Unexpected data from server';
+      console.error('Dashboard: invalid API response shape', data);
+      return;
+    }
+
+    if (!data.latest) {
       $('dataSource').textContent = 'No data yet';
       return;
     }
@@ -113,7 +164,7 @@
       charts.hum   = makeChart('chartHum',   labels, series.humidities,   COLORS.hum,   '%');
       charts.press = makeChart('chartPress', labels, series.pressures,    COLORS.press, 'hPa');
     } else {
-      for (const [key, prop, seriesKey] of [
+      for (const [key, , seriesKey] of [
         ['temp',  'temperatures', 'temperatures'],
         ['hum',   'humidities',   'humidities'],
         ['press', 'pressures',    'pressures'],

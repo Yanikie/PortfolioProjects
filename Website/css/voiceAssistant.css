@@ -164,7 +164,7 @@ nav{
 }
 
 .mobile-menu__link {
-  font-family: var(--decoFont);
+  font-family: var(--normalFont);
   font-size: 2.2rem;
   color: var(--heading);
   transition: color var(--transition);

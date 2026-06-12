@@ -21,9 +21,6 @@ if (links.length) {
   });
 }
 
-// Note last clicked button
-const links = document.querySelectorAll(".mobile-menu__link");
-
 links.forEach(link => {
   link.addEventListener("click", () => {
     links.forEach(l => l.classList.remove("active"));
