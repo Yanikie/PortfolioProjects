@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<style>
+:root{
+    --backgroundColor: #1F3A2E;
+    --textColor:#CFC7B8;
+    --textColorMuted:#c7b89b;
+    --borderColor:#356652;
+    --middleColor:#2F5B49;
+    --sectionColor:#29503F;
+    --muted:#8a8070;
+    --normalFont:'Georgia';
+}
+body{
+    background-color: var(--backgroundColor);
+    color:var(--textColor);
+    padding: 1rem;
+}
+.textTitle{
+    text-align: center;
+    font-family: var(--normalFont);
+    font-size: 3rem;
+}
+.subtitle{
+    padding:10px;
+    margin-bottom:10px;
+    text-align: center;
+    color: var(--textMutedColor);
+    font-size: 1.5rem;
+    font-family: var(--normalFont);
+    font-style: italic;
+}
+.firstShow{
+    padding:24px;
+
+    border: 1px solid var(--borderColor);
+    background-color: var(--sectionColor);
+    border-radius:5px;
+    
+    font-family: var(--normalFont);
+    font-size: 1rem;
+}
+.inputRow{
+    display:flex;
+    gap:0.75rem;
+}
+
+button{
+    padding:0.5rem 0.75rem;
+    background-color: var(--middleColor);
+    border:3px solid var(--middleColor);
+    border-radius: 5px;
+    font-family: var(--normalFont);
+    color:var(--textColorMuted);
+    transition:border-color 0.15s;
+}
+button:hover{border-color: var(--borderColor);}
+input{
+    padding:0.5rem 0.75rem;
+    flex:1;
+    border-radius: 5px;
+    border:3px solid var(--backgroundColor);
+    background-color: var(--backgroundColor);
+    color:var(--textColorMuted);
+    font-family: var(--normalFont);
+    outline:none;
+    transition:border-color 0.15s;
+}
+input::placeholder{color:var(--textColorMuted)}
+input:focus{border-color:var(--borderColor);}
+.header{
+    font-size: 1.5rem;
+    padding-bottom:15px;
+}
+.startGame{
+    margin-top: 20px;
+    text-align: center;
+    width:100%;
+}
+.startGame:disabled{
+    background-color: var(--backgroundColor);
+    border-color: var(--sectionColor);
+    color: var(--muted);
+}
+#playersDiv{
+    margin-top: 10px;
+}
+.name{
+    flex:1;
+    width:100%;
+    margin: 3px;
+}
+
+/* Playing */
+.playing{
+}
+.playerPoints{
+    width: 70%;
+}
+.scoreButtons{
+    width:34px;
+    height:34px;
+    border-radius:6px;
+    font-size:1.2rem;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+}
+
+</style>
+<!-- ------------------------------------- HTML-------------------------------------------------------------------------- -->
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content= "Playing a game of Toepen gets a lot easier with this scoreboard"/>
+    <link rel="canonical" href="https://hogetoorn.com/Toepen">
+    <title>ScoreBoard | Toepen</title>
+</head>
+<body>
+<div class="textTitle"><b>Toepen</b></div>
+<div class="subtitle">Scoreboard</div>
+<div class="firstShow" id="firstShow">
+    <section class="header">
+        Players
+    </section>
+    <div class="inputRow">
+    <input type="text" placeholder="Player name" id="nameInputField"/>
+    <button class="buttonAdd" onclick="addPlayer()">Add</button>
+    </div>
+    <button class="startGame" onclick="startGame()" disabled id="startGameButton">Start Game</button>
+</div>
+<div class="firstShow" id="playersDiv" style="display: none;"></div>
+<div class="firstShow playing" id= "playing" style=display:none>
+    <section class="header">Scores</section>
+</div>
+</body>
+
+<script>
+// ----------------------------------------- Script ---------------------------------------------------------------
+const nameInput = document.getElementById('nameInputField');
+let players = [];
+nameInput.addEventListener('keydown', e => { if(e.key === 'Enter') addPlayer(); });
+
+function addPlayer(){
+    const name = nameInputField.value.trim();
+    if(!name) return;
+    players.push(name);
+    nameInput.value='';
+    placeNames();
+}
+
+function removeName(name){
+    // Overwrite current array with a new array
+    // Let the array be any name which is not equal to the provided name
+    players = players.filter(player => player !== name);
+    placeNames();
+}
+
+function placeNames(){
+    const correspondingDiv = document.getElementById('playersDiv');
+    correspondingDiv.innerHTML = players.map(player =>`
+    <button class="name" onclick="removeName('${player}')">${player}</button>`).join('');
+    correspondingDiv.style.display='grid';
+    if(players.length >= 2){document.getElementById('startGameButton').disabled = false;}
+    else if(players.length == 0){document.getElementById('playersDiv').style.display = 'none';}
+    else if(players.length < 2){document.getElementById('startGameButton').disabled = true;}
+}
+
+
+let scores = {};
+
+function startGame(){
+    players.forEach(player => scores[player] = 0);
+    document.getElementById('firstShow').style.display = 'none';
+    document.getElementById('playersDiv').style.display = 'none';
+    document.getElementById('playing').style.display = 'block';
+    renderScores();
+}
+
+function renderScores(){
+    const fullDiv = document.getElementById('playing');
+    fullDiv.innerHTML = players.map(p => {
+        const pts = scores[p];
+        return `
+        <div class="playerName">${p}</div>
+        <div class="controls">
+            <button class= "scoreButtons" onclick="adjust('${p}', -1)" ${pts <= 0 ? 'disabled' : ''}>−</button>
+            <div class="playerPoints">${pts}</div>
+            <button class= "scoreButtons" onclick="adjust('${p}', 1)">+</button>
+        </div>`;
+        }).join('');
+}
+
+function adjust(name, delta) {
+  scores[name] = Math.max(0, scores[name] + delta);
+  renderScores();
+}
+</script>
