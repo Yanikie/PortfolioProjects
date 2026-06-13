@@ -99,6 +99,7 @@ input:focus{border-color:var(--borderColor);}
     padding:10px 0;
     border-bottom:1px solid var(--borderColor);
     gap:1rem;
+    font-size: 0.85rem;
 }
 .scoreRow:last-child{
     border-bottom: none;
@@ -109,10 +110,10 @@ input:focus{border-color:var(--borderColor);}
     gap:12px;
 }
 .scoreButtons{
-    width:34px;
-    height:34px;
+    width: 28px;
+    height: 28px;  
+    font-size: 1rem;  
     border-radius:6px;
-    font-size:1.2rem;
     font-weight:600;
     display:flex;
     align-items:center;
@@ -143,6 +144,15 @@ input:focus{border-color:var(--borderColor);}
     padding-left:12px;
 }
 
+.resetGame{
+    margin-top:16px;
+    width:50%;
+    background-color:var(--backgroundColor);
+    border-color:var(--backgroundColor);
+    color:var(--muted);
+}
+.resetGame:hover{border-color:var(--muted);}
+
 </style>
 <!-- ------------------------------------- HTML-------------------------------------------------------------------------- -->
 <head>
@@ -159,7 +169,7 @@ input:focus{border-color:var(--borderColor);}
     <section class="header">Players</section>
     <div class="inputRow">
         <input type="text" placeholder="Player name" id="nameInputField"/>
-    <button class="buttonAdd" onclick="addPlayer()">Add</button>
+        <button class="buttonAdd" onclick="addPlayer()">Add</button>
     </div>
     <button class="startGame" onclick="startGame()" disabled id="startGameButton">Start Game</button>
 </div>
@@ -167,7 +177,9 @@ input:focus{border-color:var(--borderColor);}
 <div class="firstShow playing" id= "playing" style="display:none;">
     <section class="header">Scores</section>
     <div id="scoreRow"></div>
+    <button class="resetGame" onclick="resetGame()">Reset game</button>
 </div>
+<button class="reset" id="resetState" onclick="resetState()" style= "display: none;">Reset Names</button>
 </body>
 
 <script>
@@ -210,6 +222,7 @@ function startGame(){
     document.getElementById('firstShow').style.display = 'none';
     document.getElementById('playersDiv').style.display = 'none';
     document.getElementById('playing').style.display = 'block';
+    document.getElementById('resetState').style.display = 'block';
     renderScores();
 }
 
@@ -224,7 +237,7 @@ function renderScores(){
                 <div class="subControls">
                     <div class="subPoints">${subScores[p]}</div>
                     <button class="scoreButtons" onclick="adjustSub('${p}', 1)">+</button>
-                    <button class="resetButton" onclick="resetSub('${p}')">reset</button>
+                    <button class="resetButton" onclick="resetSub('${p}')">⟳</button>
                 </div>
             </div>
         </div>`
@@ -244,5 +257,20 @@ function adjustSub(name, delta){
 function resetSub(name){
     subScores[name] = 0;
     renderScores();
+}
+
+function resetGame(){
+    players.forEach(player => scores[player] = 0);
+    players.forEach(player => subScores[player] = 0);
+    renderScores();
+}
+function resetState(){
+    players = [];
+    nameInput.value = '';
+    document.getElementById('startGameButton').disabled = true;
+    document.getElementById('playersDiv').style.display = 'none';
+    document.getElementById('playing').style.display = 'none';
+    document.getElementById('firstShow').style.display = 'block';
+    document.getElementById('resetState').style.display = 'none';
 }
 </script>
