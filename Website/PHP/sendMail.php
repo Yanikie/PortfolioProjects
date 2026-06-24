@@ -15,10 +15,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && ($_GET['csrf'] ?? '') === '1') {
     exit;
 }
 
+function load_env(string $path): void {
+    if (!file_exists($path)) {
+        http_response_code(500);
+        fail('Server configuration missing.');
+    }
+
+    foreach (file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#')) {
+            continue;
+        }
+
+        [$key, $val] = explode('=', $line, 2);
+        $_ENV[trim($key)] = trim($val);
+    }
+}
+
+load_env(dirname(__DIR__) . '/.env');
+
 // ── Only accept POST from here on ─────────────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     exit('Method Not Allowed');
+}
+
+function wants_json(): bool {
+    $accept = $_SERVER['HTTP_ACCEPT'] ?? '';
+    $xhr = $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '';
+    return stripos($accept, 'application/json') !== false
+        || strcasecmp($xhr, 'XMLHttpRequest') === 0;
+}
+
+function respond_json(array $data, int $status = 200): void {
+    header('Content-Type: application/json; charset=utf-8');
+    http_response_code($status);
+    echo json_encode($data);
+    exit;
+}
+
+function fail(string $message, int $status = 400): void {
+    if (wants_json()) {
+        respond_json(['success' => false, 'error' => $message], $status);
+    }
+    header('Location: ../index.html?mail=failed');
+    exit;
+}
+
+function success(string $message = 'Email sent'): void {
+    if (wants_json()) {
+        respond_json(['success' => true, 'message' => $message], 200);
+    }
+    header('Location: ../index.html?mail=success');
+    exit;
 }
 
 // ── Rate limiting ─────────────────────────────────────────────────────────────
@@ -43,10 +92,8 @@ function check_rate_limit(): void {
     }
 
     if (count($entries) >= $max) {
-        http_response_code(429);
         header('Retry-After: ' . $window);
-        header('Location: ../index.html?mail=failed');
-        exit;
+        fail('Rate limit exceeded. Please try again later.', 429);
     }
 
     $entries[] = $now;
@@ -60,9 +107,7 @@ $submitted_token = $_POST['csrf_token'] ?? '';
 $session_token   = $_SESSION['csrf_token'] ?? '';
 
 if ($session_token === '' || !hash_equals($session_token, $submitted_token)) {
-    http_response_code(403);
-    header('Location: ../index.html?mail=failed');
-    exit;
+    fail('CSRF token missing or invalid.', 403);
 }
 // Burn the token so it can only be used once
 unset($_SESSION['csrf_token']);
@@ -83,18 +128,15 @@ $message  = clean_text($_POST['message'] ?? '');
 $honeypot = trim($_POST['website']       ?? '');
 
 if ($honeypot !== '') {
-    http_response_code(400);
-    exit('Bad request');
+    fail('Bad request.');
 }
 
 if ($name === '' || $email === '' || $message === '') {
-    header('Location: ../index.html?mail=failed');
-    exit();
+    fail('Please complete all required fields.');
 }
 
 if (strlen($message) > 4000) {
-    header('Location: ../index.html?mail=failed');
-    exit();
+    fail('Message is too long.');
 }
 
 if (
@@ -103,11 +145,17 @@ if (
     || is_header_injection($name)
     || is_header_injection($message)
 ) {
-    header('Location: ../index.html?mail=failed');
-    exit();
+    fail('Invalid form input.');
 }
 
 // ── Send ──────────────────────────────────────────────────────────────────────
+require_once __DIR__ . '/PHPMailer/src/Exception.php';
+require_once __DIR__ . '/PHPMailer/src/PHPMailer.php';
+require_once __DIR__ . '/PHPMailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 $to      = 'yannick@hogetoorn.com';
 $subject = 'New Contact Form Message';
 
@@ -115,17 +163,35 @@ $body  = "Name: $name\n";
 $body .= "Email: $email\n\n";
 $body .= "Message:\n$message\n";
 
-$headers = [
-    'From: noreply@hogetoorn.com',
-    "Reply-To: $email",
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=UTF-8',
-];
+$mail = new PHPMailer(true);
 
-if (mail($to, $subject, $body, implode("\r\n", $headers))) {
-    header('Location: ../index.html?mail=success');
-    exit();
-} else {
-    header('Location: ../index.html?mail=failed');
-    exit();
+try {
+    $smtpUsername = $_ENV['SMTP_USERNAME'] ?? '';
+    $smtpPassword = $_ENV['SMTP_PASSWORD'] ?? '';
+
+    if ($smtpUsername === '' || $smtpPassword === '') {
+        fail('SMTP credentials are not configured. Please set SMTP_USERNAME and SMTP_PASSWORD in .env.', 500);
+    }
+
+    $mail->isSMTP();
+    $mail->Host       = 'mail.mijndomein.nl';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $smtpUsername;
+    $mail->Password   = $smtpPassword;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port       = 587;
+
+    $mail->setFrom('yannick@hogetoorn.com', 'Hogetoorn Website');
+    $mail->addAddress($to, 'Yannick Hogetoorn');
+    $mail->addReplyTo($email, $name);
+
+    $mail->Subject = $subject;
+    $mail->Body    = $body;
+    $mail->AltBody = $body;
+    $mail->CharSet = 'UTF-8';
+
+    $mail->send();
+    success('Message sent successfully.');
+} catch (Exception $e) {
+    fail('Mail delivery failed. ' . $mail->ErrorInfo);
 }

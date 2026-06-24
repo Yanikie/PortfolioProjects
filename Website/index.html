@@ -7,9 +7,9 @@
   <link rel="canonical" href="https://hogetoorn.com/">
   <title>Who Am I | Yannick Hogetoorn</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
-<script src="js/dashboard.js"></script>
+<script src="/JS/dashboard.js"></script>
 <body>
   <!-- Background Letters-->
   <div class="animatedBackground"><span>YH</span></div>
@@ -69,7 +69,7 @@
             <span>Gazebo</span><span>C++</span><span>Python</span><span>Scrum</span>
           </div>
           <div class="project-card__footer">
-            <a href="autonomous.html" class="project-card__link">View Details →</a>
+            <a href="/Autonomous/" class="project-card__link">View Details →</a>
           </div>
         </article>
 
@@ -85,7 +85,7 @@
             <span>C++</span><span>Linux</span><span>Hardware</span>
           </div>
           <div class="project-card__footer">
-            <a href="voiceAssistant.html" class="project-card__link">View Details →</a>
+            <a href="/Autonomous/" class="project-card__link">View Details →</a>
           </div>
         </article>
 
@@ -101,7 +101,7 @@
             <span>Python</span><span>SQL</span><span>Transformers</span><span>Scrum</span>
           </div>
           <div class="project-card__footer">
-            <a href="customerService.html" class="project-card__link">View Details →</a>
+            <a href="CustomerService/" class="project-card__link">View Details →</a>
           </div>
         </article>
 
@@ -212,6 +212,14 @@
   </footer>
 
 <script>
+  const formNote = document.getElementById('formNote');
+  const contactForm = document.getElementById('contactForm');
+
+  function showFormNote(message, isError = false) {
+    formNote.textContent = message;
+    formNote.classList.toggle('form-note--error', isError);
+  }
+
   // Fetch the CSRF token when the page loads
   fetch('PHP/sendMail.php?csrf=1')
     .then(r => r.json())
@@ -220,35 +228,45 @@
       input.type = 'hidden';
       input.name = 'csrf_token';
       input.value = d.token;
-      document.getElementById('contactForm').appendChild(input);
+      contactForm.appendChild(input);
+    })
+    .catch(() => {
+      showFormNote('Unable to load the contact form token. Refresh the page and try again.', true);
     });
 
   // Intercept the form submit and send it in the background
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // stop the browser navigating to sendMail.php
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
 
+    showFormNote('');
     const form = e.target;
     const data = new FormData(form);
 
     fetch('PHP/sendMail.php', {
       method: 'POST',
+      headers: { 'Accept': 'application/json' },
       body: data,
     })
-    .then(r => {
-      // PHP redirects to index.html?mail=success or ?mail=failed
-      // r.url is where it ended up after following the redirect
-      if (r.url.includes('mail=success')) {
+      .then(async r => {
+        let result;
+        try {
+          result = await r.json();
+        } catch (err) {
+          throw new Error('Invalid response from server.');
+        }
+
+        if (!r.ok || !result.success) {
+          throw new Error(result.error || result.message || 'Unknown server error.');
+        }
+
         window.location.href = 'index.html?mail=success';
-      } else {
-        window.location.href = 'index.html?mail=failed';
-      }
-    })
-    .catch(() => {
-      window.location.href = 'index.html?mail=failed';
-    });
+      })
+      .catch(error => {
+        showFormNote(`Send failed: ${error.message}`, true);
+      });
   });
 </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="/js/server.js"></script>
+  <script src="/JS/server.js"></script>
 </body>
 </html>
