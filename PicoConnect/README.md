@@ -1,52 +1,43 @@
-# Goal of folder
-Folder shows how a pico can be deployed to be a sensor node while distributing information to a server.
+# PicoConnect
+Weather station built on a Raspberry Pi Pico W. Every minute it measures the temperature and air pressure and posts them to my website, where they are shown on a dashboard.
 
-# Board Properties
+# Hardware
 
-| Board | Chip | Role | WiFi |
-|---|---|---|---|
-| Raspberry Pi Pico W | RP2040 (dual M0+ @ 133 MHz, 264 KB RAM) | Sensor node | Yes |
+| Part | Role |
+|---|---|
+| Raspberry Pi Pico W | Sensor node with WiFi |
+| BMP280 | Temperature and air pressure (I2C) |
 
-### DHT11 wiring (confirmed working)
+### BMP280 wiring
 
 ```
-DHT11 pin    →    Pico W
+BMP280    →    Pico W
 ─────────────────────────
-VCC          →    3.3V (pin 36)
-DATA         →    GP2  (pin 4)
-GND          →    GND  (pin 38)
-```
----
-
-# Project phases
-
-### Phase 1 — Pico W sensor reads 
-
-**Goal:** Confirm the Pico W can read the DHT11 and print valid data.
-
-**Completed steps:**
-- PlatformIO project created in VS Code (Arduino framework, `rpipicow` board, Earle Philhower core)
-- DHT11 wired to GP2 
-- Serial output confirmed: `{"temperature":21.0,"humidity":55.0}`
-
-
-**Libraries needed (add to `platformio.ini`):**
-```ini
-lib_deps =
-    adafruit/DHT sensor library @ ^1.4.6
-    adafruit/Adafruit Unified Sensor @ ^1.1.14
+VCC       →    3.3V  (pin 36)
+GND       →    GND   (pin 38)
+SCL       →    GP5   (pin 7)
+SDA       →    GP4   (pin 6)
+CSB       →    3.3V  (selects I2C instead of SPI)
+SDO       →    GND   (sets the I2C address to 0x76)
 ```
 
----
+# Setup
+1. Open the folder in VS Code with the PlatformIO extension
+2. Create `include/secrets.h` (not in git):
+   ```cpp
+   #define networkSSID "..."
+   #define networkPass "..."
+   #define apiKey "..."
+   ```
+3. Close the serial monitor and press **Upload**. PlatformIO resets the Pico into BOOTSEL by itself and copies the firmware to the `RPI-RP2` drive, so no button press is needed.
+4. Open the serial monitor at **115200** baud.
 
-### Phase 2 — Pico W posts to local server
+# How it works
+1. `setup()` starts the sensor and connects to WiFi
+2. Every 60 seconds `loop()` reads the sensor and posts a JSON message to `https://www.hogetoorn.com/api/sensor.php`:
+   ```json
+   {"temperature":21.8,"humidity":0.0,"pressure":1031.80}
+   ```
+3. The server checks the `X-API-Key` header, stores the reading and keeps 7 days of data
+4. When WiFi or the sensor drops out, the Pico retries on the next interval instead of hanging
 
-**Goal:** Replace `Serial.print` with an MQTT publish to a broker server. This proves the full sensor → server data pipeline before anything else is built.
-
-**Steps:**
-1. Add WiFi credentials and connect in `setup()`
-2. Build a JSON string from the sensor readings
-3. Publish the message to the mqtt broker on my server
-4. Build the minimal server endpoint that receives and prints the data
-
----
