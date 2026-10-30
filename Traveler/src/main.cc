@@ -2,6 +2,7 @@
 #include <DNSServer.h>
 #include <WebServer.h>
 #include <Preferences.h>
+#include "ePaper/ePaperDisplay.h"
 
 // --- Configuration ---
 const char* AP_SSID = "Traveler";
@@ -14,6 +15,7 @@ IPAddress apIP(192, 168, 4, 1);
 DNSServer dnsServer;
 WebServer server(80);
 Preferences prefs;
+ePaper display(115200);   // uses default constructor arg (baudrate = 115200)
 
 // --- Helper: build the page HTML, injecting the current saved tag ---
 String buildIndexHtml() {
@@ -51,6 +53,8 @@ void handleTagSubmit() {
     prefs.putString("tag", newTag);
     Serial.print("Saved tag: ");
     Serial.println(newTag);
+
+    display.showTag(newTag);   // Push it to the e-paper
   }
   // After saving, redirect back to "/" so the page reloads
   // showing the newly saved value (and a fresh empty-vs-filled state)
@@ -86,6 +90,13 @@ void setup() {
   server.on("/tag", HTTP_POST, handleTagSubmit);
   server.onNotFound(handleNotFound);
   server.begin();
+
+  // Optional: show the last-saved tag on boot, so the display
+  // isn't blank if you power on without submitting a new tag
+  String savedTag = prefs.getString("tag", "");
+  if (savedTag.length() > 0) {
+    display.showTag(savedTag);
+  }
 }
 
 void loop() {
