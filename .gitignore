@@ -1,2 +1,7 @@
+.pio/
+.vscode/
+secrets.h
+
+
 serverBuild/config.py
 .env
