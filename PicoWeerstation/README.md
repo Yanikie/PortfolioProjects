@@ -1,4 +1,4 @@
-# PicoConnect
+# PicoWeerstation
 Weather station built on a Raspberry Pi Pico W. Every minute it measures the temperature and air pressure and posts them to my website, where they are shown on a dashboard.
 
 # Hardware
@@ -41,3 +41,12 @@ SDO       →    GND   (sets the I2C address to 0x76)
 3. The server checks the `X-API-Key` header, stores the reading and keeps 7 days of data
 4. When WiFi or the sensor drops out, the Pico retries on the next interval instead of hanging
 
+# Expand
+- SCD40/41 for CO2 
+- SHT40 for Humidity
+- BH1750 for Light 
+
+- OTA updates
+- Push notifications
+
+- Tamagotchi project integration
