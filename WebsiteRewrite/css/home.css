@@ -1,0 +1,325 @@
+/* -------- Intro -------- */
+.intro-spacer,
+.intro-title {
+  display: none;
+}
+
+.has-intro .intro-spacer {
+  position: relative;
+  display: block;
+  height: 100vh;
+  height: 100svh;
+  margin-top: calc(-1 * var(--bar-h));
+  background: var(--graphite);
+}
+
+.has-intro .intro-title {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 25;
+  display: block;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.intro-title__name {
+  color: color-mix(in srgb, var(--soft) calc(var(--p, 0) * 100%), var(--text));
+  font-size: clamp(2rem, 8.5vw, 6rem);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.intro-title__tagline {
+  margin-top: 0.4rem;
+  color: var(--bronze);
+  font-size: clamp(1rem, 1.7vw, 1.5rem);
+  opacity: calc(1 - var(--p, 0) * 3);
+}
+
+.intro-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  width: 1px;
+  height: 7rem;
+  background: var(--soft);
+  opacity: calc(1 - var(--p, 0) * 3);
+}
+
+.intro-hint::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -4px;
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid var(--soft);
+  border-bottom: 1px solid var(--soft);
+  transform: rotate(45deg);
+}
+
+.has-intro .topbar__logo,
+.has-intro .topbar__menu {
+  opacity: clamp(0, calc((var(--p, 0) - 0.6) * 2.5), 1);
+}
+
+/* On desktop the content rises over the full width, then the sidebar fades in on top */
+@media (min-width: 901px) {
+  .has-intro .intro-spacer {
+    margin-left: calc(-1 * var(--sidebar-w));
+  }
+
+  .has-intro .sidebar {
+    background: rgb(48 48 48 / clamp(0, calc((var(--p, 0) - 0.5) * 2), 1));
+  }
+
+  .has-intro .sidebar__logo,
+  .has-intro .sidebar__nav {
+    opacity: clamp(0, calc((var(--p, 0) - 0.6) * 2.5), 1);
+  }
+}
+
+.has-intro .topbar__name {
+  visibility: hidden;
+}
+
+.has-intro.intro-done .topbar__name {
+  visibility: visible;
+}
+
+.has-intro.intro-done .intro-title {
+  visibility: hidden;
+}
+
+/* -------- Projects -------- */
+.projects {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--divider);
+}
+
+.project {
+  position: relative;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.project__title {
+  font-size: 1.5rem;
+}
+
+.project__title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.project__title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.project:hover .project__title a,
+.project__title a:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--bronze);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+}
+
+.project__title a:focus-visible {
+  outline: none;
+}
+
+.project:has(.project__title a:focus-visible) {
+  outline: 2px solid var(--bronze);
+  outline-offset: 4px;
+}
+
+.project__featured {
+  margin-left: 0.75rem;
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+.project__desc {
+  max-width: 38em;
+  margin-top: 0.6rem;
+}
+
+.project__desc a {
+  position: relative;
+  z-index: 1;
+}
+
+.project__tech {
+  margin-top: 0.6rem;
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+/* -------- Study Room -------- */
+#study-room {
+  max-width: 90rem;
+}
+
+.status {
+  margin: -1rem 0 2.5rem;
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+.readings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+
+.reading__label {
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+.reading__value {
+  color: var(--text);
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.reading__unit {
+  margin-left: 0.25rem;
+  color: var(--soft);
+  font-size: 1.125rem;
+}
+
+.reading__range {
+  min-height: 1.65em;
+  color: var(--soft);
+  font-size: 0.9375rem;
+}
+
+.reading__chart {
+  position: relative;
+  height: 10rem;
+  margin-top: 1rem;
+}
+
+.reading__note {
+  margin-top: 1rem;
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+/* -------- Contact -------- */
+#contact {
+  max-width: 90rem;
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 44rem) minmax(12rem, 1fr);
+  grid-template-areas: "form ways";
+  gap: clamp(3rem, 8vw, 8rem);
+  margin-top: 1rem;
+}
+
+.contact__aside {
+  grid-area: ways;
+}
+
+.form {
+  grid-area: form;
+}
+
+.contact__ways {
+  display: grid;
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.contact__ways dt {
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+.contact__ways dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.form {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem;
+}
+
+.form__field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+.form__field input,
+.form__field textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--field-border);
+  border-radius: 4px;
+  background: var(--field);
+  color: var(--text);
+  font: 400 1.0625rem var(--font);
+}
+
+.form__field textarea {
+  min-height: 11rem;
+  resize: vertical;
+}
+
+.form__field input:focus-visible,
+.form__field textarea:focus-visible {
+  outline-offset: 1px;
+  border-color: var(--bronze);
+}
+
+.form__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form__note {
+  min-height: 1.65em;
+  font-size: 1rem;
+}
+
+.form__note.is-error {
+  color: #f0a39a;
+}
+
+/* -------- Mobile -------- */
+@media (max-width: 900px) {
+  .readings {
+    grid-template-columns: 1fr;
+  }
+
+  .contact {
+    grid-template-columns: 1fr;
+    grid-template-areas: "ways" "form";
+    gap: 2.5rem;
+  }
+
+  .form__row {
+    grid-template-columns: 1fr;
+  }
+}
