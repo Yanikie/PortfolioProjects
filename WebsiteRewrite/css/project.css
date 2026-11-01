@@ -1,0 +1,79 @@
+/* -------- Page head -------- */
+.page-head {
+  padding-bottom: 3rem;
+}
+
+.page-head__title {
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  line-height: 1.1;
+}
+
+.page-head__lead {
+  max-width: 34em;
+  margin-top: 1.25rem;
+  font-size: 1.25rem;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 3.5rem;
+  margin: 2.5rem 0 0;
+}
+
+.facts dt {
+  color: var(--soft);
+  font-size: 1rem;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--text);
+}
+
+/* -------- Steps -------- */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--divider);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 2rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.step__tech {
+  color: var(--soft);
+  font-size: 1rem;
+  line-height: 2.2;
+}
+
+.step__title {
+  margin-bottom: 0.6rem;
+  font-size: 1.5rem;
+}
+
+.step p:not(.step__tech) {
+  max-width: 38em;
+}
+
+/* -------- Mobile -------- */
+@media (max-width: 900px) {
+  .page-head {
+    padding-top: 2.5rem;
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .step__tech {
+    line-height: 1.65;
+  }
+}
