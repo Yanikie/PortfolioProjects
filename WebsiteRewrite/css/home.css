@@ -162,7 +162,7 @@
 
 /* -------- Study Room -------- */
 #study-room {
-  max-width: 90rem;
+  padding-right: max(var(--gutter), calc(100% - 90rem + var(--gutter)));
 }
 
 .status {
@@ -215,7 +215,7 @@
 
 /* -------- Contact -------- */
 #contact {
-  max-width: 90rem;
+  padding-right: max(var(--gutter), calc(100% - 90rem + var(--gutter)));
 }
 
 .contact {

@@ -197,14 +197,19 @@ a:hover {
   min-height: 100vh;
 }
 
+/* Sections span the full content width so the contour lines can too; the right padding keeps text within 60rem */
 .section {
-  max-width: 60rem;
-  padding: 4.5rem var(--gutter);
+  padding: 4rem max(var(--gutter), calc(100% - 60rem + var(--gutter))) 4rem var(--gutter);
   scroll-margin-top: var(--bar-h);
 }
 
-.section + .section {
-  padding-top: 1.5rem;
+/* -------- Contour lines (Les Arcs / La Plagne) on every second section -------- */
+.main > .section:nth-of-type(even) {
+  background: url("/assets/paradiski.svg") 30% 40% / 2048px 2048px;
+}
+
+.main > .section:nth-of-type(4n) {
+  background-position: 75% 65%;
 }
 
 .section__title {
