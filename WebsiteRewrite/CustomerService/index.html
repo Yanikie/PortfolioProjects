@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Service Analysis | Yannick Hogetoorn</title>
+  <meta name="description" content="A data challenge: comparing the sentiment and formality of American Air's customer service tweets with 8 competitors, based on more than 2 million tweets.">
+  <link rel="canonical" href="https://hogetoorn.com/CustomerService/">
+
+  <!-- -------- Open Graph (link preview on LinkedIn, WhatsApp, Discord) -------- -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hogetoorn.com/CustomerService/">
+  <meta property="og:title" content="Customer Service Analysis | Yannick Hogetoorn">
+  <meta property="og:description" content="Does a more formal tone make customers happier? An analysis of 2 million airline customer service tweets.">
+  <meta property="og:image" content="https://hogetoorn.com/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- -------- End Open Graph -------- -->
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#303030">
+
+  <link rel="preload" href="/fonts/ibm-plex-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/project.css">
+  <script src="/js/nav.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- -------- Sidebar (same block on every page) -------- -->
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar__logo" href="/"><img src="/assets/logo.svg" alt="Home" width="40" height="40"></a>
+    <nav class="sidebar__nav" aria-label="Main">
+      <ul>
+        <li>
+          <a href="/">Home</a>
+          <ul>
+            <li><a href="/#projects">Projects</a></li>
+            <li><a href="/#study-room">Study Room</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </li>
+        <li><a href="/Autonomous/">AMP - Greendigger</a></li>
+        <li><a href="/VoiceAssistant/">Voice Assistant</a></li>
+        <li><a href="/CustomerService/">Customer Service Analysis</a></li>
+        <li><a href="/Toepen/">Toepen</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <!-- -------- End sidebar -------- -->
+
+  <header class="topbar">
+    <a class="topbar__logo" href="/"><img src="/assets/logo.svg" alt="Home" width="32" height="32"></a>
+    <a class="topbar__name" href="/">Yannick Hogetoorn</a>
+    <button class="topbar__menu" id="menuButton" type="button" aria-controls="sidebar" aria-expanded="false">
+      <span class="visually-hidden">Menu</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </header>
+
+  <main class="main" id="main">
+    <!-- -------- Page head -------- -->
+    <section class="section page-head" id="hero" aria-labelledby="page-title">
+      <h1 class="page-head__title" id="page-title">Customer Service Analysis</h1>
+      <p class="page-head__lead">A data challenge: evaluating American Air's customer service on Twitter by comparing the sentiment and formality of its tweets with competitors, and giving a data-driven recommendation.</p>
+
+      <dl class="facts">
+        <div>
+          <dt>Data</dt>
+          <dd>2M+ tweets, 9 airlines</dd>
+        </div>
+        <div>
+          <dt>Validation</dt>
+          <dd>500 hand-labelled tweets</dd>
+        </div>
+        <div>
+          <dt>Built with</dt>
+          <dd>Python, SQL, Transformers</dd>
+        </div>
+        <div>
+          <dt>Way of working</dt>
+          <dd>Team project, Scrum</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- -------- Overview -------- -->
+    <section class="section" id="overview" aria-labelledby="overview-title">
+      <h2 class="section__title" id="overview-title">The aim of the project</h2>
+      <div class="prose">
+        <p>The aim of this project is to evaluate the customer service performance of American Air and their Twitter team. We compare them with competitors and analyse tweets from both the airline and their customers. We also advise them on how to improve their team.</p>
+        <p>Our goal is to find out whether American Air improves or worsens the emotion of the customer within a conversation. Additionally, we chose to analyse the formality of the Twitter team's tweets, and whether it has an impact on customer emotion.</p>
+      </div>
+    </section>
+
+    <!-- -------- Methodology -------- -->
+    <section class="section" id="methodology" aria-labelledby="methodology-title">
+      <h2 class="section__title" id="methodology-title">Data pipeline and approach</h2>
+      <p class="lead">The project followed a structured pipeline from raw data to a business recommendation. The last part ran as two parallel tracks: sentiment analysis and formality analysis.</p>
+      <ol class="steps steps--keyed">
+        <li class="step">
+          <h3 class="step__key">Data cleaning</h3>
+          <p>Removed tweets without relevant information and tweets that were not in English. Kept all relevant airline data.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Database</h3>
+          <p>An SQL database stores the data in a structured way, using tables that work well with a dataset of this size.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Defining a conversation</h3>
+          <p>Before we could analyse the effect of a conversation, we had to define what a conversation is. The definition we arrived at: an entirely English conversation between at least two users, of at least two tweets.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Analysing conversations</h3>
+          <p>A conversation is complete when the problem is solved or redirected. What matters is the difference in sentiment between the first and the last message.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Sentiment analysis</h3>
+          <p>Language models label the general emotion of each tweet. To determine the quality of the model, we compared its output with our own labels for 500 tweets in a confusion matrix.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Formality analysis</h3>
+          <p>A pretrained formality model rates each tweet on a scale of 0 (informal) to 1 (formal). We validated it the same way as the sentiment model, against the 500 hand-labelled tweets. The model achieved an accuracy of 78.8%.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- -------- Business idea -------- -->
+    <section class="section" id="businessIdea" aria-labelledby="business-title">
+      <h2 class="section__title" id="business-title">Does formality drive sentiment?</h2>
+      <p class="lead">Research has shown a link between formality and the effectiveness of a message, and that there might be a level of formality that improves the tone. That gave us a reason to look into whether higher formality leads to a better sentiment evolution, and whether American Air could profit from more formal tweets.</p>
+      <ul class="steps steps--keyed">
+        <li class="step">
+          <h3 class="step__key">Scatter plot</h3>
+          <p>Shows sentiment evolution and formality scores for all airlines. Sentiment clusters at specific values (−2, −1, 0, 1 and 2), while formality scores vary widely across the range from 0 to 1.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Box plot</h3>
+          <p>With the <strong>third lowest formality score</strong>, American Air's tweets are less formal than those of most competitors. This introduced the idea that more formality could improve sentiment evolution.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Formality scale</h3>
+          <p>The model rates tweets on a scale of <strong>0 (informal)</strong> to <strong>1 (formal)</strong>. An accuracy of 78.8% is acceptable, which means we can rely on the outcome.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- -------- Findings -------- -->
+    <section class="section" id="findings" aria-labelledby="findings-title">
+      <h2 class="section__title" id="findings-title">What the data revealed</h2>
+      <p class="lead">Comparing ranges of formality with their average sentiment evolution gave a clear sweet spot for the formality of a tweet.</p>
+      <ul class="steps steps--keyed">
+        <li class="step">
+          <h3 class="step__key">Formality 0.0–0.2</h3>
+          <p>A very low sentiment evolution of <strong>0.0576</strong>. Highly informal tweets go together with barely any positive change in customer emotion.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Formality 0.6–0.8</h3>
+          <p>A significantly higher sentiment evolution of <strong>0.2547</strong>. Moderate to high formality shows a meaningful improvement in customer sentiment.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Formality 0.8–1.0</h3>
+          <p>A sentiment evolution of <strong>0.2452</strong>: diminishing returns. Overly formal tweets risk sounding robotic, so American Air is advised <strong>not to go overboard</strong>.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">Conclusion</h3>
+          <p><strong>Higher formality had a positive effect on sentiment evolution.</strong> The optimal range appears to be 0.6 to 0.8: formal enough to be professional, natural enough to feel human.</p>
+        </li>
+        <li class="step">
+          <h3 class="step__key">American Air</h3>
+          <p>An average sentiment evolution of <strong>0.227</strong>. Overall the team slightly improved customer sentiment, but with the third lowest formality among the airlines, there is a lot of room to improve.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- -------- Recommendation -------- -->
+    <section class="section" id="recommendation" aria-labelledby="recommendation-title">
+      <h2 class="section__title" id="recommendation-title">What American Air should do</h2>
+      <div class="prose">
+        <p>The American Air Twitter team had an average sentiment evolution of <strong>0.227</strong>, which means that overall they slightly improved the sentiment of their customers. We also found that higher formality leads to a better score.</p>
+        <p>With American Air having the third lowest formality, there is plenty of room for improvement. We therefore believe <strong>the Twitter team should be kept</strong> and guided towards a more consistently formal style, without tipping into robotic territory.</p>
+      </div>
+
+      <div class="split">
+        <div>
+          <h3 class="split__title">For the Twitter team</h3>
+          <p><strong>Training and development.</strong> Train the Twitter team to write more formal replies to customers, while making sure they don't sound robotic. This helps to achieve a higher sentiment evolution.</p>
+          <p><strong>Consistent communication.</strong> Keeping the same level of formality across all conversations helps to maintain a professional and reliable brand image.</p>
+        </div>
+        <div>
+          <h3 class="split__title">For our own project</h3>
+          <p><strong>Time.</strong> A different database platform would have saved time: putting the conversations into tables took 16 hours. Running the sentiment and formality analysis locally instead of online would also have delivered results faster.</p>
+          <p><strong>Accuracy.</strong> A model better suited to this project would improve the results. An accuracy of 78.8% leaves room for error, which could affect the advice to the company.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
