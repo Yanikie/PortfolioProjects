@@ -148,6 +148,10 @@ input:focus{border-color:var(--borderColor);}
     padding-left:12px;
 }
 
+.joinRow{
+    margin-top:16px;
+}
+
 .resetGame{
     margin-top:16px;
     width:50%;
@@ -181,6 +185,10 @@ input:focus{border-color:var(--borderColor);}
 <div class="firstShow playing" id= "playing" style="display:none;">
     <section class="header">Scores</section>
     <div id="scoreRow"></div>
+    <div class="inputRow joinRow">
+        <input type="text" placeholder="New player" id="joinInputField"/>
+        <button onclick="joinPlayer()">Add</button>
+    </div>
     <button class="resetGame" onclick="resetGame()">Reset game</button>
 </div>
 <button class="reset" id="resetState" onclick="resetState()" style= "display: none;">Reset Names</button>
@@ -246,6 +254,20 @@ function renderScores(){
             </div>
         </div>`
     ).join('');
+}
+
+// -------- Join mid-game --------
+const joinInput = document.getElementById('joinInputField');
+joinInput.addEventListener('keydown', e => { if(e.key === 'Enter') joinPlayer(); });
+
+function joinPlayer(){
+    const name = joinInput.value.trim();
+    if(!name || players.includes(name)) return;
+    scores[name] = Math.max(...players.map(p => scores[p]));
+    subScores[name] = 0;
+    players.push(name);
+    joinInput.value = '';
+    renderScores();
 }
 
 function adjust(name, delta){
