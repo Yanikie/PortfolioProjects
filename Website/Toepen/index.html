@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <style>
+@font-face{
+    font-family: "IBM Plex Serif";
+    src: url("/fonts/ibm-plex-serif-latin-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face{
+    font-family: "IBM Plex Serif";
+    src: url("/fonts/ibm-plex-serif-latin-500-normal.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
 :root{
     --backgroundColor: #1F3A2E;
     --textColor:#CFC7B8;
@@ -8,34 +20,29 @@
     --middleColor:#2F5B49;
     --sectionColor:#29503F;
     --muted:#8a8070;
-    --normalFont:'Georgia';
+    --normalFont:"IBM Plex Serif", Georgia, serif;
+}
+html, button{
+    touch-action: manipulation;
 }
 body{
     background-color: var(--backgroundColor);
     color:var(--textColor);
     padding: 1rem;
+    font-variant-numeric: tabular-nums;
 }
 .textTitle{
-    text-align: center;
     font-family: var(--normalFont);
     font-size: 3rem;
-}
-.subtitle{
-    padding:10px;
-    margin-bottom:10px;
-    text-align: center;
-    color: var(--textMutedColor);
-    font-size: 1.5rem;
-    font-family: var(--normalFont);
-    font-style: italic;
+    font-weight: 500;
+    line-height: 1.1;
 }
 .firstShow{
+    max-width: 36rem;
     padding:24px;
-
-    border: 1px solid var(--borderColor);
     background-color: var(--sectionColor);
     border-radius:5px;
-    
+
     font-family: var(--normalFont);
     font-size: 1rem;
 }
@@ -62,6 +69,7 @@ input{
     background-color: var(--backgroundColor);
     color:var(--textColorMuted);
     font-family: var(--normalFont);
+    font-size: 16px;
     outline:none;
     transition:border-color 0.15s;
 }
@@ -94,64 +102,138 @@ input:focus{border-color:var(--borderColor);}
 
 .scoreRow{
     display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:10px 0;
+    align-items:stretch;
     border-bottom:1px solid var(--borderColor);
-    gap:1rem;
-    font-size: 0.85rem;
 }
 .scoreRow:last-child{
     border-bottom: none;
 }
-.controls{
+.scoreRow button{
+    border:none;
+    border-radius:0;
+    background:none;
+    color:var(--textColor);
+    font-size:1.1rem;
+    cursor:pointer;
+}
+.scoreRow button:active{background-color:var(--middleColor);}
+.scoreRow button:focus-visible{
+    outline:2px solid var(--textColorMuted);
+    outline-offset:-2px;
+}
+.mainPoint{
+    flex:1;
+    min-width:0;
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:1rem;
+    min-height:52px;
+    padding:0 0.5rem 0 0;
+    text-align:left;
 }
-.scoreButtons{
-    width: 28px;
-    height: 28px;  
-    font-size: 1rem;  
-    border-radius:6px;
-    font-weight:600;
+.playerName{
+    flex:1;
+    min-width:0;
+    overflow-wrap:anywhere;
+}
+.points{
+    min-width:1.5em;
+    font-size:1.3rem;
+    font-weight:500;
+    text-align:right;
+}
+.scoreRow .subPoint{
     display:flex;
     align-items:center;
-    justify-content:center;
-    padding:0;
-}
-.subPoints{
-    color:var(--muted);
-    font-size:0.95rem;
-    min-width:16px;
-    text-align:center;
-}
-
-.resetButton{
-    padding:0.25rem 0.6rem;
-    font-size:0.75rem;
-    color:var(--muted);
-    border-color:var(--backgroundColor);
-    background-color:var(--backgroundColor);
-}
-.resetButton:hover{border-color:var(--muted);}
-
-.subControls{
-    display:flex;
-    align-items:center;
-    gap:8px;
+    gap:5px;
+    padding:0 0 0 12px;
     border-left:1px solid var(--borderColor);
-    padding-left:12px;
 }
-
-.resetGame{
+.pip{
+    width:10px;
+    height:10px;
+    border:1.5px solid var(--muted);
+    border-radius:50%;
+    box-sizing:border-box;
+}
+.pip.filled{
+    background-color:var(--textColorMuted);
+    border-color:var(--textColorMuted);
+}
+.undo{
     margin-top:16px;
-    width:50%;
+    padding:0.5rem 1rem;
+    font-size:1rem;
+}
+.undo:disabled{
     background-color:var(--backgroundColor);
-    border-color:var(--backgroundColor);
+    border-color:var(--sectionColor);
     color:var(--muted);
 }
-.resetGame:hover{border-color:var(--muted);}
+
+/* -------- Settings -------- */
+.top{
+    max-width: 36rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0.5rem 0 1.5rem;
+}
+.settings{
+    position: relative;
+    font-family: var(--normalFont);
+}
+.settings summary{
+    padding: 0.5rem 0;
+    list-style: none;
+    color: var(--textColorMuted);
+    cursor: pointer;
+}
+.settings summary::-webkit-details-marker{
+    display: none;
+}
+.settingsPanel{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1;
+    width: min(300px, calc(100vw - 2rem));
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background-color: var(--sectionColor);
+    border: 1px solid var(--borderColor);
+    border-radius: 5px;
+}
+.setting{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.setting input{
+    flex: none;
+    width: 4rem;
+}
+.joinField{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.joinField input{
+    flex: none;
+}
+.settingsPanel button{
+    font-size: 1rem;
+}
+.settingsPanel .quiet{
+    background-color: var(--backgroundColor);
+    border-color: var(--backgroundColor);
+    color: var(--muted);
+}
+.settingsPanel .quiet:hover{border-color: var(--muted);}
 
 </style>
 <!-- ------------------------------------- HTML-------------------------------------------------------------------------- -->
@@ -163,23 +245,38 @@ input:focus{border-color:var(--borderColor);}
     <title>ScoreBoard | Toepen</title>
 </head>
 <body>
-<div class="textTitle"><b>Toepen</b></div>
-<div class="subtitle">Scoreboard</div>
+<header class="top">
+    <div class="textTitle">Toepen</div>
+    <details class="settings" id="settings" style="display: none;">
+        <summary>Settings</summary>
+        <div class="settingsPanel">
+            <label class="setting">
+                Secondary points per primary point
+                <input type="number" id="maxInput" min="1" max="9" value="3" inputmode="numeric"/>
+            </label>
+            <div class="joinField">
+                <input type="text" placeholder="New player" id="joinInputField"/>
+                <button onclick="joinPlayer()">Add</button>
+            </div>
+            <button class="quiet" onclick="resetGame()">Reset scores</button>
+            <button class="quiet" onclick="resetState()">Reset names</button>
+        </div>
+    </details>
+</header>
 <div class="firstShow" id="firstShow">
     <section class="header">Players</section>
     <div class="inputRow">
         <input type="text" placeholder="Player name" id="nameInputField"/>
         <button class="buttonAdd" onclick="addPlayer()">Add</button>
     </div>
+    <div id="playersDiv" style="display: none;"></div>
     <button class="startGame" onclick="startGame()" disabled id="startGameButton">Start Game</button>
 </div>
-<div class="firstShow" id="playersDiv" style="display: none;"></div>
 <div class="firstShow playing" id= "playing" style="display:none;">
     <section class="header">Scores</section>
     <div id="scoreRow"></div>
-    <button class="resetGame" onclick="resetGame()">Reset game</button>
+    <button class="undo" id="undoButton" onclick="undo()" disabled>Undo</button>
 </div>
-<button class="reset" id="resetState" onclick="resetState()" style= "display: none;">Reset Names</button>
 </body>
 
 <script>
@@ -211,66 +308,173 @@ function placeNames(){
     if(players.length >= 2){document.getElementById('startGameButton').disabled = false;}
     else if(players.length == 0){document.getElementById('playersDiv').style.display = 'none';}
     else if(players.length < 2){document.getElementById('startGameButton').disabled = true;}
+    save();
 }
 
 let scores = {};
 let subScores = {};
+let playing = false;
 
 function startGame(){
     players.forEach(player => scores[player] = 0);
     players.forEach(player => subScores[player] = 0);
+    undoStack = [];
+    showGame();
+}
+
+function showGame(){
+    playing = true;
     document.getElementById('firstShow').style.display = 'none';
     document.getElementById('playersDiv').style.display = 'none';
     document.getElementById('playing').style.display = 'block';
-    document.getElementById('resetState').style.display = 'block';
+    settings.style.display = 'block';
     renderScores();
 }
 
 function renderScores(){
-    document.getElementById('scoreRow').innerHTML = players.map(p => `
+    document.getElementById('scoreRow').innerHTML = players.map((p, i) => `
         <div class="scoreRow">
-            <div class="playerName">${p}</div>
-            <div class="controls">
-                <button class="scoreButtons" onclick="adjust('${p}', -1)">−</button>
-                <div class="playerPoints">${scores[p]}</div>
-                <button class="scoreButtons" onclick="adjust('${p}', 1)">+</button>
-                <div class="subControls">
-                    <div class="subPoints">${subScores[p]}</div>
-                    <button class="scoreButtons" onclick="adjustSub('${p}', 1)">+</button>
-                    <button class="resetButton" onclick="resetSub('${p}')">⟳</button>
-                </div>
-            </div>
+            <button class="mainPoint" onclick="addPoint(${i})" aria-label="${p}, ${scores[p]} points. Add a point">
+                <span class="playerName">${p}</span>
+                <span class="points">${scores[p]}</span>
+            </button>
+            <button class="subPoint" onclick="addSub(${i})" aria-label="${subScores[p]} of ${subMax} secondary points. Add one">${pips(p)}</button>
         </div>`
     ).join('');
+    document.getElementById('undoButton').disabled = undoStack.length === 0;
+    save();
 }
 
-function adjust(name, delta){
-    scores[name] = scores[name] + delta;
-    renderScores();
+function pips(p){
+    return Array.from({length: subMax}, (_, n) => `<span class="pip${n < subScores[p] ? ' filled' : ''}"></span>`).join('');
 }
 
-function adjustSub(name, delta){
-    subScores[name] = subScores[name] + delta;
-    renderScores();
-}
+// -------- Join mid-game --------
+const joinInput = document.getElementById('joinInputField');
+joinInput.addEventListener('keydown', e => { if(e.key === 'Enter') joinPlayer(); });
 
-function resetSub(name){
+function joinPlayer(){
+    const name = joinInput.value.trim();
+    if(!name || players.includes(name)) return;
+    snapshot();
+    scores[name] = Math.max(...players.map(p => scores[p]));
     subScores[name] = 0;
+    players.push(name);
+    joinInput.value = '';
+    renderScores();
+}
+
+// -------- Scoring --------
+function addPoint(i){
+    snapshot();
+    scores[players[i]]++;
+    renderScores();
+}
+
+// -------- Secondary points --------
+let subMax = 3;
+const maxInput = document.getElementById('maxInput');
+maxInput.addEventListener('change', changeMax);
+
+function addSub(i){
+    const name = players[i];
+    snapshot();
+    subScores[name]++;
+    if(subScores[name] >= subMax){
+        scores[name]++;
+        subScores[name] = 0;
+    }
+    renderScores();
+}
+
+function changeMax(){
+    const value = Math.min(9, Math.round(Number(maxInput.value)));
+    if(!value || value < 1 || value === subMax){
+        maxInput.value = subMax;
+        return;
+    }
+    snapshot();
+    subMax = value;
+    maxInput.value = subMax;
+    players.forEach(p => {
+        if(subScores[p] >= subMax){
+            scores[p]++;
+            subScores[p] = 0;
+        }
+    });
     renderScores();
 }
 
 function resetGame(){
+    snapshot();
     players.forEach(player => scores[player] = 0);
     players.forEach(player => subScores[player] = 0);
     renderScores();
 }
 function resetState(){
     players = [];
+    scores = {};
+    subScores = {};
+    undoStack = [];
+    playing = false;
     nameInput.value = '';
     document.getElementById('startGameButton').disabled = true;
     document.getElementById('playersDiv').style.display = 'none';
     document.getElementById('playing').style.display = 'none';
     document.getElementById('firstShow').style.display = 'block';
-    document.getElementById('resetState').style.display = 'none';
+    settings.open = false;
+    settings.style.display = 'none';
+    save();
 }
+
+// -------- Undo --------
+let undoStack = [];
+
+function snapshot(){
+    undoStack.push({players: [...players], scores: {...scores}, subScores: {...subScores}, subMax});
+}
+
+function undo(){
+    const last = undoStack.pop();
+    if(!last) return;
+    players = last.players;
+    scores = last.scores;
+    subScores = last.subScores;
+    subMax = last.subMax;
+    maxInput.value = subMax;
+    renderScores();
+}
+
+// -------- Settings --------
+const settings = document.getElementById('settings');
+document.addEventListener('click', e => {
+    if(!settings.open || settings.contains(e.target)) return;
+    settings.open = false;
+    e.stopPropagation();
+}, true);
+
+// -------- Saving --------
+function save(){
+    try{
+        localStorage.setItem('toepen', JSON.stringify({players, scores, subScores, subMax, playing, undoStack}));
+    }catch(e){}
+}
+
+function load(){
+    let saved;
+    try{
+        saved = JSON.parse(localStorage.getItem('toepen'));
+    }catch(e){}
+    if(!saved || !Array.isArray(saved.players)) return;
+    players = saved.players;
+    scores = saved.scores || {};
+    subScores = saved.subScores || {};
+    subMax = saved.subMax || 3;
+    undoStack = saved.undoStack || [];
+    maxInput.value = subMax;
+    if(saved.playing) showGame();
+    else if(players.length) placeNames();
+}
+
+load();
 </script>

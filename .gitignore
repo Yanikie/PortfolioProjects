@@ -2,6 +2,11 @@
 .vscode/
 secrets.h
 
+.claude/
+CLAUDE.md
 
-serverBuild/config.py
+
+ServerBuild/config.py
 .env
+
+.backups/

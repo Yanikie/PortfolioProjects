@@ -1,0 +1,322 @@
+/* -------- Fonts -------- */
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("/fonts/ibm-plex-serif-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Serif";
+  src: url("/fonts/ibm-plex-serif-latin-500-normal.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* -------- Tokens -------- */
+:root {
+  --graphite: #303030;
+  --canvas: #2c2c2c;
+  --text: #ffffff;
+  --text-body: #e2e2e2;
+  --soft: #b3b3b3;
+  --divider: #444444;
+  --field: #383838;
+  --field-border: #787878;
+  --bronze: #c98b57;
+  --ember: #522c10;
+  --cream: #ebc9a6;
+
+  --font: "IBM Plex Serif", Georgia, serif;
+  --sidebar-w: clamp(15rem, 20vw, 20rem);
+  --bar-h: 4.5rem;
+  --gutter: clamp(1rem, 4vw, 4rem);
+
+  color-scheme: dark;
+}
+
+/* -------- Base -------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text-body);
+  font-family: var(--font);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text);
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--bronze);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--ember);
+  color: var(--cream);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* -------- Sidebar -------- */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 20;
+  width: var(--sidebar-w);
+  background: var(--graphite);
+  overflow-y: auto;
+}
+
+.sidebar__logo {
+  display: flex;
+  align-items: center;
+  height: var(--bar-h);
+  padding: 0 1.5rem;
+}
+
+.sidebar__logo img {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.sidebar__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar__nav > ul {
+  padding: 0.5rem 0 2rem;
+}
+
+.sidebar__nav a {
+  display: block;
+  padding: 0.3rem 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.sidebar__nav ul ul a {
+  padding-left: 2.5rem;
+  color: var(--soft);
+}
+
+.sidebar__nav a:hover {
+  color: var(--bronze);
+}
+
+.sidebar__nav a.is-active,
+.sidebar__nav a[aria-current="page"] {
+  color: var(--bronze);
+  font-weight: 500;
+}
+
+/* -------- Top bar -------- */
+.topbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: var(--sidebar-w);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--bar-h);
+  background: var(--graphite);
+}
+
+.topbar__name {
+  color: var(--soft);
+  font-size: 1.375rem;
+  text-decoration: none;
+}
+
+.topbar__menu {
+  display: none;
+}
+
+/* -------- Main -------- */
+.main {
+  margin-left: var(--sidebar-w);
+  padding-top: var(--bar-h);
+  min-height: 100vh;
+}
+
+/* Sections span the full content width so the contour lines can too; the right padding keeps text within 60rem */
+.section {
+  padding: 4rem max(var(--gutter), calc(100% - 60rem + var(--gutter))) 4rem var(--gutter);
+  scroll-margin-top: var(--bar-h);
+}
+
+/* -------- Contour lines (Les Arcs / La Plagne) on every second section -------- */
+.main > .section:nth-of-type(even) {
+  background: url("/assets/paradiski.svg") 30% 40% / 2048px 2048px;
+}
+
+.main > .section:nth-of-type(4n) {
+  background-position: 75% 65%;
+}
+
+.section__title {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  margin-bottom: 2rem;
+}
+
+.lead {
+  max-width: 34em;
+  margin-bottom: 2rem;
+}
+
+/* -------- Button -------- */
+.button {
+  display: inline-block;
+  padding: 0.65rem 1.4rem;
+  border: 0;
+  border-radius: 4px;
+  background: var(--ember);
+  color: var(--cream);
+  font: 500 1.0625rem var(--font);
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #61361a;
+}
+
+.button:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+/* -------- Mobile -------- */
+@media (max-width: 900px) {
+  .sidebar {
+    z-index: 40;
+    width: min(20rem, 85vw);
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    visibility: hidden;
+  }
+
+  .sidebar.is-open {
+    transform: none;
+    visibility: visible;
+  }
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .topbar {
+    left: 0;
+    padding: 0 1rem;
+  }
+
+  .topbar__logo {
+    position: absolute;
+    left: 1rem;
+  }
+
+  .topbar__logo img {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .topbar__menu {
+    position: absolute;
+    right: 0.5rem;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .topbar__name {
+    font-size: 1.125rem;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 901px) {
+  .topbar__logo,
+  .backdrop {
+    display: none;
+  }
+}
+
+/* -------- Reduced motion -------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sidebar {
+    transition: none;
+  }
+}

@@ -1,28 +1,9 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
-<url>
-<loc>https://hogetoorn.com/</loc>
-<lastmod>2026-05-31T09:50:46+00:00</lastmod>
-<priority>1.00</priority>
-</url>
-<url>
-<loc>https://hogetoorn.com/autonomous.html</loc>
-<lastmod>2026-05-31T09:42:25+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://hogetoorn.com/voiceAssistant.html</loc>
-<lastmod>2026-05-31T09:50:10+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://hogetoorn.com/customerService.html</loc>
-<lastmod>2026-05-31T09:39:15+00:00</lastmod>
-<priority>0.80</priority>
-</url>
-<url>
-<loc>https://hogetoorn.com/index.html</loc>
-<lastmod>2026-05-31T09:50:46+00:00</lastmod>
-<priority>0.64</priority>
-</url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://hogetoorn.com/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://hogetoorn.com/Autonomous/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://hogetoorn.com/VoiceAssistant/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://hogetoorn.com/CustomerService/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://hogetoorn.com/Toepen/</loc><lastmod>2026-11-01</lastmod></url>
+
 </urlset>
