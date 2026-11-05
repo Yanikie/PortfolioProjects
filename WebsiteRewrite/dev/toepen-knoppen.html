@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!-- Testpagina voor de nieuwe scoreinteractie op /Toepen/. Niet uploaden. -->
+<html lang="nl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Toepen interactie test</title>
+<style>
+/* -------- Basis (zelfde als Toepen) -------- */
+@font-face{
+    font-family: "IBM Plex Serif";
+    src: url("/fonts/ibm-plex-serif-latin-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face{
+    font-family: "IBM Plex Serif";
+    src: url("/fonts/ibm-plex-serif-latin-500-normal.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
+:root{
+    --backgroundColor: #1F3A2E;
+    --textColor:#CFC7B8;
+    --textColorMuted:#c7b89b;
+    --borderColor:#356652;
+    --middleColor:#2F5B49;
+    --sectionColor:#29503F;
+    --muted:#8a8070;
+    --normalFont:"IBM Plex Serif", Georgia, serif;
+}
+html, button{
+    touch-action: manipulation;
+}
+body{
+    margin: 0;
+    padding: 1rem;
+    background-color: var(--backgroundColor);
+    color: var(--textColor);
+    font-family: var(--normalFont);
+    font-variant-numeric: tabular-nums;
+}
+button{
+    background-color: var(--middleColor);
+    border: 3px solid var(--middleColor);
+    border-radius: 5px;
+    font-family: var(--normalFont);
+    color: var(--textColorMuted);
+}
+input{
+    width: 4rem;
+    padding: 0.4rem 0.6rem;
+    border: 3px solid var(--backgroundColor);
+    border-radius: 5px;
+    background-color: var(--backgroundColor);
+    color: var(--textColorMuted);
+    font-family: var(--normalFont);
+    font-size: 16px;
+    outline: none;
+}
+input:focus{border-color: var(--borderColor);}
+
+/* -------- Testpagina -------- */
+.intro{
+    max-width: 40rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+.phone{
+    width: 343px;
+    max-width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    background-color: var(--sectionColor);
+    border-radius: 5px;
+}
+
+/* -------- Scorerij -------- */
+.scoreRow{
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--borderColor);
+}
+.scoreRow:last-child{
+    border-bottom: none;
+}
+.scoreRow button{
+    border: none;
+    border-radius: 0;
+    background: none;
+    color: var(--textColor);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.scoreRow button:active{
+    background-color: var(--middleColor);
+}
+.scoreRow button:focus-visible{
+    outline: 2px solid var(--textColorMuted);
+    outline-offset: -2px;
+}
+.mainPoint{
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 52px;
+    padding: 0 0.5rem 0 0;
+    text-align: left;
+}
+.playerName{
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+.points{
+    min-width: 1.5em;
+    font-weight: 500;
+    font-size: 1.3rem;
+    text-align: right;
+}
+.scoreRow .subPoint{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 0 0 0.75rem;
+    border-left: 1px solid var(--borderColor);
+}
+.pip{
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid var(--muted);
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.pip.filled{
+    background-color: var(--textColorMuted);
+    border-color: var(--textColorMuted);
+}
+
+/* -------- Onder de lijst -------- */
+.undo{
+    margin-top: 16px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+.undo:disabled{
+    background-color: var(--backgroundColor);
+    border-color: var(--sectionColor);
+    color: var(--muted);
+}
+
+/* -------- Kop met settings -------- */
+.column{
+    width: 343px;
+    max-width: 100%;
+}
+.top{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0.5rem 0 1.5rem;
+}
+.textTitle{
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.1;
+}
+.settings{
+    position: relative;
+}
+.settings summary{
+    padding: 0.5rem 0;
+    list-style: none;
+    color: var(--textColorMuted);
+    cursor: pointer;
+}
+.settings summary::-webkit-details-marker{
+    display: none;
+}
+.settingsPanel{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1;
+    width: min(300px, calc(100vw - 2rem));
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background-color: var(--sectionColor);
+    border: 1px solid var(--borderColor);
+    border-radius: 5px;
+}
+.setting{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.inputRow{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.inputRow input{
+    width: auto;
+}
+.settingsPanel button{
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+}
+.settingsPanel .quiet{
+    background-color: var(--backgroundColor);
+    border-color: var(--backgroundColor);
+    color: var(--muted);
+}
+</style>
+</head>
+<body>
+<div class="intro">
+    Tik op een naam of score voor een hoofdpunt, tik op de bolletjes voor een secundair punt.
+    Bij het maximum gaat de hoofdscore 1 omhoog en de bolletjes terug naar leeg.
+    Undo draait de laatste actie terug, ook een wijziging van het maximum, een nieuwe speler en Reset scores.
+    Reset names herlaadt hier alleen de pagina; op de echte pagina ga je terug naar het invoeren van namen.
+</div>
+<div class="column">
+    <header class="top">
+        <div class="textTitle">Toepen</div>
+        <details class="settings" id="settings">
+            <summary>Settings</summary>
+            <div class="settingsPanel">
+                <label class="setting">
+                    Secondary points per primary point
+                    <input type="number" id="maxInput" min="1" max="9" value="3" inputmode="numeric"/>
+                </label>
+                <div class="inputRow">
+                    <input type="text" placeholder="New player" id="joinInput"/>
+                    <button onclick="joinPlayer()">Add</button>
+                </div>
+                <button class="quiet" onclick="resetScores()">Reset scores</button>
+                <button class="quiet" onclick="location.reload()">Reset names</button>
+            </div>
+        </details>
+    </header>
+    <div class="phone">
+        <div id="scores"></div>
+        <button class="undo" id="undoButton" onclick="undo()" disabled>Undo</button>
+    </div>
+</div>
+
+<script>
+// -------- State --------
+let players = ['Yannick', 'Annemarie', 'Jan-Willem', 'Bas'];
+let scores = {Yannick: 7, Annemarie: 12, 'Jan-Willem': 9, Bas: 14};
+let subScores = {Yannick: 1, Annemarie: 0, 'Jan-Willem': 2, Bas: 0};
+let subMax = 3;
+let undoStack = [];
+const maxInput = document.getElementById('maxInput');
+
+function snapshot(){
+    undoStack.push({players: [...players], scores: {...scores}, subScores: {...subScores}, subMax});
+}
+
+// -------- Render --------
+function render(){
+    document.getElementById('scores').innerHTML = players.map((p, i) => {
+        const pips = Array.from({length: subMax}, (_, n) => `<span class="pip${n < subScores[p] ? ' filled' : ''}"></span>`).join('');
+        return `
+        <div class="scoreRow">
+            <button class="mainPoint" onclick="addPoint(${i})" aria-label="${p}, ${scores[p]} points. Add a point">
+                <span class="playerName">${p}</span>
+                <span class="points">${scores[p]}</span>
+            </button>
+            <button class="subPoint" onclick="addSub(${i})" aria-label="${subScores[p]} of ${subMax} secondary points. Add one">${pips}</button>
+        </div>`;
+    }).join('');
+    document.getElementById('undoButton').disabled = undoStack.length === 0;
+    maxInput.value = subMax;
+}
+
+// -------- Acties --------
+function addPoint(i){
+    snapshot();
+    scores[players[i]]++;
+    render();
+}
+
+function addSub(i){
+    const p = players[i];
+    snapshot();
+    subScores[p]++;
+    if(subScores[p] >= subMax){
+        scores[p]++;
+        subScores[p] = 0;
+    }
+    render();
+}
+
+function changeMax(){
+    const value = Math.round(Number(maxInput.value));
+    if(!value || value < 1 || value === subMax) return render();
+    snapshot();
+    subMax = value;
+    players.forEach(p => {
+        if(subScores[p] >= subMax){
+            scores[p]++;
+            subScores[p] = 0;
+        }
+    });
+    render();
+}
+maxInput.addEventListener('change', changeMax);
+
+const joinInput = document.getElementById('joinInput');
+joinInput.addEventListener('keydown', e => { if(e.key === 'Enter') joinPlayer(); });
+
+function joinPlayer(){
+    const name = joinInput.value.trim();
+    if(!name || players.includes(name)) return;
+    snapshot();
+    scores[name] = Math.max(...players.map(p => scores[p]));
+    subScores[name] = 0;
+    players.push(name);
+    joinInput.value = '';
+    render();
+}
+
+function resetScores(){
+    snapshot();
+    players.forEach(p => {
+        scores[p] = 0;
+        subScores[p] = 0;
+    });
+    render();
+}
+
+// -------- Settings sluiten bij tik ernaast --------
+const settings = document.getElementById('settings');
+document.addEventListener('click', e => {
+    if(!settings.open || settings.contains(e.target)) return;
+    settings.open = false;
+    e.stopPropagation();
+}, true);
+
+function undo(){
+    const last = undoStack.pop();
+    if(!last) return;
+    players = last.players;
+    scores = last.scores;
+    subScores = last.subScores;
+    subMax = last.subMax;
+    render();
+}
+
+render();
+</script>
+</body>
+</html>
