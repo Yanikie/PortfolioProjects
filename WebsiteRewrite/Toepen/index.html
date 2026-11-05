@@ -308,19 +308,26 @@ function placeNames(){
     if(players.length >= 2){document.getElementById('startGameButton').disabled = false;}
     else if(players.length == 0){document.getElementById('playersDiv').style.display = 'none';}
     else if(players.length < 2){document.getElementById('startGameButton').disabled = true;}
+    save();
 }
 
 let scores = {};
 let subScores = {};
+let playing = false;
 
 function startGame(){
     players.forEach(player => scores[player] = 0);
     players.forEach(player => subScores[player] = 0);
+    undoStack = [];
+    showGame();
+}
+
+function showGame(){
+    playing = true;
     document.getElementById('firstShow').style.display = 'none';
     document.getElementById('playersDiv').style.display = 'none';
     document.getElementById('playing').style.display = 'block';
     settings.style.display = 'block';
-    undoStack = [];
     renderScores();
 }
 
@@ -335,6 +342,7 @@ function renderScores(){
         </div>`
     ).join('');
     document.getElementById('undoButton').disabled = undoStack.length === 0;
+    save();
 }
 
 function pips(p){
@@ -405,6 +413,10 @@ function resetGame(){
 }
 function resetState(){
     players = [];
+    scores = {};
+    subScores = {};
+    undoStack = [];
+    playing = false;
     nameInput.value = '';
     document.getElementById('startGameButton').disabled = true;
     document.getElementById('playersDiv').style.display = 'none';
@@ -412,6 +424,7 @@ function resetState(){
     document.getElementById('firstShow').style.display = 'block';
     settings.open = false;
     settings.style.display = 'none';
+    save();
 }
 
 // -------- Undo --------
@@ -439,4 +452,29 @@ document.addEventListener('click', e => {
     settings.open = false;
     e.stopPropagation();
 }, true);
+
+// -------- Saving --------
+function save(){
+    try{
+        localStorage.setItem('toepen', JSON.stringify({players, scores, subScores, subMax, playing, undoStack}));
+    }catch(e){}
+}
+
+function load(){
+    let saved;
+    try{
+        saved = JSON.parse(localStorage.getItem('toepen'));
+    }catch(e){}
+    if(!saved || !Array.isArray(saved.players)) return;
+    players = saved.players;
+    scores = saved.scores || {};
+    subScores = saved.subScores || {};
+    subMax = saved.subMax || 3;
+    undoStack = saved.undoStack || [];
+    maxInput.value = subMax;
+    if(saved.playing) showGame();
+    else if(players.length) placeNames();
+}
+
+load();
 </script>
