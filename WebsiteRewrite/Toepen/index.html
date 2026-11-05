@@ -10,6 +10,9 @@
     --muted:#8a8070;
     --normalFont:'Georgia';
 }
+html, button{
+    touch-action: manipulation;
+}
 body{
     background-color: var(--backgroundColor);
     color:var(--textColor);
@@ -62,6 +65,7 @@ input{
     background-color: var(--backgroundColor);
     color:var(--textColorMuted);
     font-family: var(--normalFont);
+    font-size: 16px;
     outline:none;
     transition:border-color 0.15s;
 }
