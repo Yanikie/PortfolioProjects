@@ -8,3 +8,5 @@ CLAUDE.md
 
 ServerBuild/config.py
 .env
+
+.backups/

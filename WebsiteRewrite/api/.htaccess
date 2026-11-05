@@ -1,3 +1,0 @@
-# Block direct access to the data folder from this .htaccess
-# (also add one in /data/ itself)
-Options -Indexes

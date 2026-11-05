@@ -1,153 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content= "A project to help GreenDigger build a full autonomous mobile platform containing object recognition and pathfinding"/>
-  <link rel="canonical" href="https://hogetoorn.com/Autonomous">
-  <title>Autonomous Mobile Platform | Project | Yannick Hogetoorn</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="autonomous.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Autonomous Mobile Platform | Yannick Hogetoorn</title>
+  <meta name="description" content="A project with GreenDigger: an autonomous mobile platform with object recognition and pathfinding, built in a team with Gazebo, C++ and Python.">
+  <link rel="canonical" href="https://hogetoorn.com/Autonomous/">
+
+  <!-- -------- Open Graph (link preview on LinkedIn, WhatsApp, Discord) -------- -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://hogetoorn.com/Autonomous/">
+  <meta property="og:title" content="Autonomous Mobile Platform | Yannick Hogetoorn">
+  <meta property="og:description" content="Object recognition and pathfinding for an autonomous platform, built with GreenDigger.">
+  <meta property="og:image" content="https://hogetoorn.com/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- -------- End Open Graph -------- -->
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#303030">
+
+  <link rel="preload" href="/fonts/ibm-plex-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/project.css">
+  <script src="/js/nav.js" defer></script>
 </head>
-
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<nav class= "nav" id= "pageNavigation">
-  <a href="../" class= "navLogo">YH</a> 
-  <ul class= "navigationLinkList">
-      <li><a href= "../" class= "navigationLinks">Home</a></li>
-      <li><a href= "#"class= "navigationLinks">Overview</a></li>
-      <li><a href= "#objectRecognition"class= "navigationLinks">ObjectRecognition</a></li>
-      <li><a href= "#pathFinding"class= "navigationLinks">Pathfinding</a></li>
-  </ul>
-  <button class="mobileNavigationIcon" id="navBurger" aria-label="Menu"> 
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+  <!-- -------- Sidebar (same block on every page) -------- -->
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar__logo" href="/"><img src="/assets/logo.svg" alt="Home" width="40" height="40"></a>
+    <nav class="sidebar__nav" aria-label="Main">
+      <ul>
+        <li>
+          <a href="/">Home</a>
+          <ul>
+            <li><a href="/#projects">Projects</a></li>
+            <li><a href="/#study-room">Study Room</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </li>
+        <li><a href="/Autonomous/">AMP - Greendigger</a></li>
+        <li><a href="/VoiceAssistant/">Voice Assistant</a></li>
+        <li><a href="/CustomerService/">Customer Service Analysis</a></li>
+        <li><a href="/Toepen/">Toepen</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <!-- -------- End sidebar -------- -->
 
-<div class="mobile-menu" id="mobileMenu">
-  <ul>
-    <li><a href="../" class="mobile-menu__link">Home</a></li>
-    <li><a href="#" class="mobile-menu__link">Overview</a></li>
-    <li><a href="#objectRecognition" class="mobile-menu__link">ObjectRecognition</a></li>
-    <li><a href="#pathFinding" class="mobile-menu__link">Pathfinding</a></li>
-  </ul>
-</div>
+  <header class="topbar">
+    <a class="topbar__logo" href="/"><img src="/assets/logo.svg" alt="Home" width="32" height="32"></a>
+    <a class="topbar__name" href="/">Yannick Hogetoorn</a>
+    <button class="topbar__menu" id="menuButton" type="button" aria-controls="sidebar" aria-expanded="false">
+      <span class="visually-hidden">Menu</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </header>
 
-<!-- === Hero ============================================================ --> 
-<header class="heroSection" id="hero"> 
+  <main class="main" id="main">
+    <!-- -------- Page head -------- -->
+    <section class="section page-head" aria-labelledby="page-title">
+      <h1 class="page-head__title" id="page-title">Autonomous Mobile Platform</h1>
+      <p class="page-head__lead">A platform that drives itself across hardpan land, so rainwater can be caught efficiently and used by the soil. Together with a team, I developed it in Gazebo for GreenDigger.</p>
 
-  <div class="heroBackground"></div>
-  <div class="heroOverlay"></div> 
-  <div class="heroGrid">
-    <svg viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5"/>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grid)" />
-    </svg>
-  </div>
+      <dl class="facts">
+        <div>
+          <dt>Partner</dt>
+          <dd><a href="https://www.greendigger.org/">GreenDigger</a></dd>
+        </div>
+        <div>
+          <dt>Built with</dt>
+          <dd>Gazebo, C++, Python, OpenCV</dd>
+        </div>
+        <div>
+          <dt>Way of working</dt>
+          <dd>Team project, Scrum</dd>
+        </div>
+      </dl>
+    </section>
 
+    <!-- -------- Object recognition -------- -->
+    <section class="section" id="objectRecognition" aria-labelledby="object-title">
+      <h2 class="section__title" id="object-title">Object recognition</h2>
+      <p class="lead">Using OpenCV, the image from a depth camera is analysed to find obstacles. The result feeds the pathfinding algorithm.</p>
+      <ul class="steps">
+        <li class="step">
+          <p class="step__tech">OpenCV</p>
+          <div>
+            <h3 class="step__title">Edge detection</h3>
+            <p>First the image from the depth camera is read. It comes in grayscale, which makes it well suited for a Canny edge filter. Using the filtered image, bounding boxes are drawn around the now amplified edges.</p>
+          </div>
+        </li>
+        <li class="step">
+          <p class="step__tech">Math</p>
+          <div>
+            <h3 class="step__title">Distance to the obstacle</h3>
+            <p>With the bounding boxes in place, the view of the camera tells where the next obstacle is. This calculation gives a vector to the object. Adding it to the position of the AMP at that moment results in the real coordinates of the obstacle.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-  <div class="heroContent container"> 
-    <div class="heroEyebrow"> GreenDigger Collaboration </div> 
-    <h1 class="heroTitle"> Autonomous <em>Mobile Platform</em> </h1>
-    <p class="heroDescription"> Mobilising a platform on a hardpan environment so rainwater can efficiently be caught and used by the soil. </p> 
-    <div class="heroStats"> 
-      <a href="#objectRecognition" class="heroStatCard"> 
-        <span>Object Recognition</span> 
-      </a>
-      <a href="#pathFinding" class="heroStatCard">
-        <span>Pathfinding </span>
-      </a> 
-    </div> 
-  </div> 
-</header> 
-
-<!-- === Object Recognition ============================================================ --> 
-<section class="section" id="objectRecognition">
-  <div class= "container">
-    <div class= "sectionHeading">
-      <div class= "sectionLabel"> OpenCV </div>
-      <h2 class= "sectionTitle"> Object Recognition </h2>
-      <div class= "sectionSubtitle">
-        Using OpenCV functions the image recorded by a depth camera is analysed
-        and used for object detection. This later informs the pathfinding 
-        algorithm.
-      </div>
-    </div>
-    <div class= "contentGrid">
-      <div class= "contentCard">
-        <p class= "contentLabel">Image Alteration</p>
-        <h2 class= "contentTitle">OpenCV Stack</h2>
-        <p class= "contentBody">
-          First the image received from the depthcamera is read. This image is in grayscale and makes it very capable for a Canny edge filter.
-          Using the edited image, bounding boxes are drawn based on the now amplified edges. 
-        </p>
-      </div>
-      <div class= "contentCard">
-        <p class= "contentLabel">Math</p>
-        <h2 class= "contentTitle">Distance</h2>
-        <p class= "contentBody">
-          After the bounding boxes are drawn a calculation can be done based on the view of the camera where the next obstacle is.
-          The result of this calculation is a vector to the next object. Adding this to the position of the AMP at that moment, 
-          results in the real coordinates of the obstacle.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- === Pathfinding ============================================================ --> 
-<section class= "section sectionAlt sectionPathfinding" id= "pathFinding">
-<div class= "container">
-  <div class= "sectionHeading">
-    <div class= "sectionLabel"> Start to Goal </div>
-    <h2 class= "sectionTitle"> Pathfinding </h2>
-    <div class= "sectionSubtitle">
-      To drive autonously a route should be determined. In the previous section 
-      possible hinderances could be determined. Now navigating around them is 
-      of the order.
-    </div>
-  </div>
-  <div class= "contentGrid">
-    <div class= "contentCard">
-      <p class= "contentLabel">A*</p>
-      <h2 class= "contentTitle">Why and How?</h2>
-      <p class= "contentBody">
-        GreenDigger supplied a map of where the planned excavation spots would be.
-        Using this, the next goal could be determined and a simple pathfinding 
-        algorithm could be chosen where one start position and one goal was used.
-        Since we know the position of the goal, the heuristicly informed A* was chosen. 
-        This is a fast algorithm which uses heuristic function to plan the best route.
-      </p>
-    </div>
-    <div class= "contentCard">
-      <p class= "contentLabel">PID</p>
-      <h2 class= "contentTitle">Driving</h2>
-      <p class= "contentBody">
-        Now that a path has been generated by the A* algorithm we are able to drive the path it created. 
-        This is done by first turning towards the next vertex and then driving there. This method is chosen 
-        because as little errors as possible can be made using this approach and the machine will not drive large distances.
-      </p>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footerInner">
-      <div class="footerLogo">YH</div>
-      <p class="footerCopy"> Autonomous Mobile Platform </p>
-    </div>
-  </div>
-</footer>
-
-<script src="../JS/server.js"></script>
+    <!-- -------- Pathfinding -------- -->
+    <section class="section" id="pathFinding" aria-labelledby="path-title">
+      <h2 class="section__title" id="path-title">Pathfinding</h2>
+      <p class="lead">To drive autonomously, the platform needs a route. The previous step found the obstacles, now it has to navigate around them.</p>
+      <ul class="steps">
+        <li class="step">
+          <p class="step__tech">A*</p>
+          <div>
+            <h3 class="step__title">Choosing an algorithm</h3>
+            <p>GreenDigger supplied a map of the planned excavation spots. With it, the next goal can be determined, so a simple pathfinding algorithm with one start and one goal is enough. Since the position of the goal is known, we chose the heuristically informed A*: a fast algorithm that uses a heuristic function to plan the best route.</p>
+          </div>
+        </li>
+        <li class="step">
+          <p class="step__tech">PID</p>
+          <div>
+            <h3 class="step__title">Driving the route</h3>
+            <p>With the route from A*, the platform drives from vertex to vertex: first it turns towards the next vertex, then it drives there. We chose this method because it leaves as little room for errors as possible, and the machine does not drive large distances.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>

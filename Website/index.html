@@ -1,272 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content= "I am Yannick Hogetoorn. Read more about my projects, contact or dashboard here!"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yannick Hogetoorn | Embedded Engineering Student</title>
+  <meta name="description" content="I am Yannick Hogetoorn, an embedded engineering student. Read about my projects, see live data from my study room or get in touch.">
   <link rel="canonical" href="https://hogetoorn.com/">
-  <title>Who Am I | Yannick Hogetoorn</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+
+  <!-- -------- Open Graph (link preview on LinkedIn, WhatsApp, Discord) -------- -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hogetoorn.com/">
+  <meta property="og:title" content="Yannick Hogetoorn | Embedded Engineering Student">
+  <meta property="og:description" content="Projects, live study room data and contact.">
+  <meta property="og:image" content="https://hogetoorn.com/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- -------- End Open Graph -------- -->
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#303030">
+
+  <link rel="preload" href="/fonts/ibm-plex-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home.css">
+
+  <script>
+    // Decide before first paint whether the intro plays, so the page never jumps
+    if (!location.hash && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.add("has-intro");
+    }
+  </script>
+  <script src="/js/nav.js" defer></script>
+  <script src="/js/intro.js" defer></script>
+  <script src="/vendor/chart-4.4.1.umd.js" defer></script>
+  <script src="/js/studyroom.js" defer></script>
+  <script src="/js/contact.js" defer></script>
 </head>
-<script src="/JS/dashboard.js"></script>
 <body>
-  <!-- Background Letters-->
-  <div class="animatedBackground"><span>YH</span></div>
+  <a class="skip-link" href="#projects">Skip to content</a>
 
-  <!-- Navigation Tabs -->
-  <nav class="nav" id="nav">
-    <div class="nav__logo">YH</div>
-    <ul class="nav__links">
-      <li><a href="#projects" class="nav__link">Projects</a></li>
-      <li><a href="#contact" class="nav__link">Contact</a></li>
-      <li><a href="#dashboard" class="nav__link">Dashboard</a></li>
-    </ul>
-    <button class="nav__burger" id="navBurger" aria-label="Menu"> 
-      <span></span><span></span><span></span>
+  <!-- -------- Sidebar (same block on every page) -------- -->
+  <aside class="sidebar" id="sidebar">
+    <a class="sidebar__logo" href="/"><img src="/assets/logo.svg" alt="Home" width="40" height="40"></a>
+    <nav class="sidebar__nav" aria-label="Main">
+      <ul>
+        <li>
+          <a href="/">Home</a>
+          <ul>
+            <li><a href="/#projects">Projects</a></li>
+            <li><a href="/#study-room">Study Room</a></li>
+            <li><a href="/#contact">Contact</a></li>
+          </ul>
+        </li>
+        <li><a href="/Autonomous/">AMP - Greendigger</a></li>
+        <li><a href="/VoiceAssistant/">Voice Assistant</a></li>
+        <li><a href="/CustomerService/">Customer Service Analysis</a></li>
+        <li><a href="/Toepen/">Toepen</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <!-- -------- End sidebar -------- -->
+
+  <header class="topbar">
+    <a class="topbar__logo" href="/"><img src="/assets/logo.svg" alt="Home" width="32" height="32"></a>
+    <a class="topbar__name" id="topbarName" href="/">Yannick Hogetoorn</a>
+    <button class="topbar__menu" id="menuButton" type="button" aria-controls="sidebar" aria-expanded="false">
+      <span class="visually-hidden">Menu</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5"/></svg>
     </button>
-  </nav>
+  </header>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobileMenu">
-    <ul>
-      <li><a href="#projects" class="mobile-menu__link">Projects</a></li>
-      <li><a href="#contact" class="mobile-menu__link">Contact</a></li>
-      <li><a href="#dashboard" class="mobile-menu__link">Dashboard</a></li>
-    </ul>
+  <div class="intro-title" id="introTitle">
+    <h1 class="intro-title__name" id="introName">Yannick Hogetoorn</h1>
+    <p class="intro-title__tagline">Embedded Engineering Student</p>
   </div>
 
-
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <div class="hero_content">
-      <p class="hero_eyebrow">EMBEDDED ENGINEERING STUDENT</p>
-      <h1 class="hero_name">Yannick<br><em>Hogetoorn</em></h1></p>
-      <div class="hero_cta">
-        <a href="#projects" class="btn btn--primary">Projects</a>
-        <a href="#contact" class="btn btn--ghost">Contact</a>
-      </div>
+  <main class="main" id="main">
+    <div class="intro-spacer" id="introSpacer">
+      <span class="intro-hint" aria-hidden="true"></span>
     </div>
-  </section>
 
-  <!-- Projects -->
-  <section class="section section--alt" id="projects">
-    <div class="container">
-      <span class="section__label">Projects</span>
-      <h2 class="section__heading">Things I've built</h2>
-      <div class="projects__grid">
+    <!-- -------- Projects -------- -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <h2 class="section__title" id="projects-title">Things I've built</h2>
+      <ul class="projects">
+        <li class="project">
+          <h3 class="project__title"><a href="/Autonomous/">Autonomous Mobile Platform</a><span class="project__featured">Featured</span></h3>
+          <p class="project__desc">Using Gazebo as development software, I worked with a team towards a fully autonomous vehicle that satisfies the needs of <a href="https://www.greendigger.org/">GreenDigger</a>.</p>
+          <p class="project__tech">Gazebo, C++, Python, Scrum</p>
+        </li>
+        <li class="project">
+          <h3 class="project__title"><a href="/VoiceAssistant/">Voice Assistant</a></h3>
+          <p class="project__desc">With an ESP32, a local server and some hardware components, I set up a fully local voice assistant for my own use. No cloud, no monthly subscriptions: ask a question and receive an answer.</p>
+          <p class="project__tech">C++, Linux, Hardware</p>
+        </li>
+        <li class="project">
+          <h3 class="project__title"><a href="/CustomerService/">Customer Service Analysis</a></h3>
+          <p class="project__desc">A lot of companies run their customer service on social media, but what tone should you use with these customers? I analysed 2 million customer service tweets and their replies to find out.</p>
+          <p class="project__tech">Python, SQL, Transformers, Scrum</p>
+        </li>
+      </ul>
+    </section>
 
-        <article class="project-card project-card--featured">
-          <div class="project-card__tag">Featured</div>
-          <div class="project-card__header">
-            <span class="project-card__category">Simulation · Autonomy</span>
-            <h3 class="project-card__title">Autonomous Mobile Platform</h3>
-          </div>
-          <p class="project-card__desc">
-            Using Gazebo as development software, I together with a team, worked towards developing a full autonomous vehicle to which could satisfy the needs of <u><a href="https://www.greendigger.org/">GreenDigger</a></u>
-          </p>
-          <div class="project-card__tech">
-            <span>Gazebo</span><span>C++</span><span>Python</span><span>Scrum</span>
-          </div>
-          <div class="project-card__footer">
-            <a href="/Autonomous/" class="project-card__link">View Details →</a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-card__header">
-            <span class="project-card__category">Embedded · Self Hosting</span>
-            <h3 class="project-card__title">Voice Assistant</h3>
-          </div>
-          <p class="project-card__desc">
-          An ESP 32, local server and some hardware components, I set up a fully local voice assistant for my own use. No cloud, no monthly subscriptions, but ask a question and receive an answer.  
-          </p>
-          <div class="project-card__tech">
-            <span>C++</span><span>Linux</span><span>Hardware</span>
-          </div>
-          <div class="project-card__footer">
-            <a href="/Autonomous/" class="project-card__link">View Details →</a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-card__header">
-            <span class="project-card__category">Data Science</span>
-            <h3 class="project-card__title">Customer service analysis</h3>
-          </div>
-          <p class="project-card__desc">
-            A lot of companies have their customer service on social media, but how should your tone be when interacting with these customers. By analysing 2 million customer service tweets and their replies an analysis was found.
-          </p>
-          <div class="project-card__tech">
-            <span>Python</span><span>SQL</span><span>Transformers</span><span>Scrum</span>
-          </div>
-          <div class="project-card__footer">
-            <a href="CustomerService/" class="project-card__link">View Details →</a>
-          </div>
-        </article>
-
-  </section>
-
-  <!-- Contact -->
-  <section class="section" id="contact">
-    <div class="container">
-      <span class="section__label">Contact</span>
-      <h2 class="section__heading">Let's connect</h2>
-      <div class="contact__grid">
-        <div class="contact__info">
-          <p class="contact__intro">Whether you have a project in mind, a question about embedded systems, or just want to connect feel free to reach out.</p>
-          <div class="contact__links">
-            <a href="mailto:yannick@hogetoorn.net" class="contact__link">
-              <span class="contact__link-icon">✉</span>
-              <span>yannick@hogetoorn.com</span>
-            </a>
-            <a href="https://www.linkedin.com/in/yannickhogetoorn/" target="_blank" class="contact__link">
-              <span class="contact__link-icon">in</span>
-              <span>linkedin.com/in/yannickhogetoorn/</span>
-            </a>
-            <a href="https://github.com/Yanikie" target="_blank" class="contact__link">
-              <span class="contact__link-icon">⌥</span>
-              <span>github.com/Yanikie</span>
-            </a>
-          </div>
+    <!-- -------- Study Room -------- -->
+    <section class="section" id="study-room" aria-labelledby="study-room-title">
+      <h2 class="section__title" id="study-room-title">Live Study Room Data</h2>
+      <p class="status" id="sensorStatus" aria-live="polite">Loading sensor data…</p>
+      <div class="readings">
+        <div class="reading">
+          <p class="reading__label">Temperature</p>
+          <p class="reading__value"><span id="valueTemp">—</span><span class="reading__unit">°C</span></p>
+          <p class="reading__range" id="rangeTemp"></p>
+          <div class="reading__chart"><canvas id="chartTemp" aria-label="Temperature over the past 7 days" role="img"></canvas></div>
         </div>
-        <form class="contact__form" id="contactForm">
-          <div class="form-group">
-            <label class="form-label" for="name">Name</label>
-            <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required />
+        <div class="reading">
+          <p class="reading__label">Humidity</p>
+          <p class="reading__value"><span id="valueHum">—</span><span class="reading__unit">%</span></p>
+          <p class="reading__range" id="rangeHum"></p>
+          <div class="reading__chart" id="chartHumWrap"><canvas id="chartHum" aria-label="Humidity over the past 7 days" role="img"></canvas></div>
+          <p class="reading__note" id="noteHum" hidden>Sensor coming soon.</p>
+        </div>
+        <div class="reading">
+          <p class="reading__label">Pressure</p>
+          <p class="reading__value"><span id="valuePress">—</span><span class="reading__unit">hPa</span></p>
+          <p class="reading__range" id="rangePress"></p>
+          <div class="reading__chart"><canvas id="chartPress" aria-label="Pressure over the past 7 days" role="img"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- -------- Contact -------- -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <h2 class="section__title" id="contact-title">Let's connect</h2>
+      <p class="lead">Whether you have a project in mind, a question about embedded systems, or just want to connect, feel free to reach out.</p>
+      <div class="contact">
+        <div class="contact__aside">
+          <dl class="contact__ways">
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:yannick@hogetoorn.com">yannick@hogetoorn.com</a></dd>
+            </div>
+            <div>
+              <dt>LinkedIn</dt>
+              <dd><a href="https://www.linkedin.com/in/yannickhogetoorn/">yannickhogetoorn</a></dd>
+            </div>
+            <div>
+              <dt>GitHub</dt>
+              <dd><a href="https://github.com/Yanikie">Yanikie</a></dd>
+            </div>
+          </dl>
+        </div>
+        <form class="form" id="contactForm" action="/PHP/sendMail.php" method="post">
+          <div class="form__row">
+            <div class="form__field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="form__field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="email">Email</label>
-            <input class="form-input" type="email" id="email" name= "email" placeholder="your@email.com" required />
+          <div class="form__field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" maxlength="4000" required></textarea>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="message">Message</label>
-            <textarea class="form-input form-textarea" id="message" name="message" placeholder="Tell me about your project or question…" required></textarea>
+          <div class="form__trap" aria-hidden="true">
+            <label for="website">Leave this field empty</label>
+            <input type="text" id="website" name="website" autocomplete="off" tabindex="-1">
           </div>
-          <input type="text" name="website" autocomplete="off" tabindex="-1" value="" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;border:0;padding:0;" />
-          <button type="submit" class="btn btn--primary btn--full">Send Message</button>
-          <p class="form-note" id="formNote"></p>
+          <div>
+            <button class="button" type="submit">Send message</button>
+          </div>
+          <p class="form__note" id="formNote" role="status"></p>
         </form>
       </div>
-    </div>
-  </section>
-
-  <!-- SENSOR DASHBOARD -->
-  <section class="section section--dashboard" id="dashboard">
-    <div class="container">
-      <span class="section__label">Sensor Dashboard</span>
-      <h2 class="section__heading">Live Study Room Data</h2>
-
-      <div class="dashboard__meta" id="dashboardMeta">
-        <span class="dashboard__source" id="dataSource">Loading…</span>
-        <span class="dashboard__ts" id="dataTimestamp"></span>
-      </div>
-
-      <!-- Stats row -->
-      <div class="dashboard__stats" id="dashboardStats">
-        <div class="stat-card stat-card--temp">
-          <span class="stat-card__label">Temperature</span>
-          <span class="stat-card__value" id="statTemp">—</span>
-          <span class="stat-card__unit">°C</span>
-          <span class="stat-card__sub" id="statTempRange">—</span>
-        </div>
-        <div class="stat-card stat-card--hum">
-          <span class="stat-card__label">Humidity</span>
-          <span class="stat-card__value" id="statHum">—</span>
-          <span class="stat-card__unit">%</span>
-          <span class="stat-card__sub" id="statHumRange">—</span>
-        </div>
-        <div class="stat-card stat-card--press">
-          <span class="stat-card__label">Pressure</span>
-          <span class="stat-card__value" id="statPress">—</span>
-          <span class="stat-card__unit">hPa</span>
-          <span class="stat-card__sub" id="statPressRange">—</span>
-        </div>
-      </div>
-
-      <!-- Charts -->
-      <div class="dashboard__charts">
-        <div class="chart-card">
-          <h3 class="chart-card__title">Temperature over time</h3>
-          <canvas id="chartTemp"></canvas>
-        </div>
-        <div class="chart-card">
-          <h3 class="chart-card__title">Humidity over time</h3>
-          <canvas id="chartHum"></canvas>
-        </div>
-        <div class="chart-card chart-card--wide">
-          <h3 class="chart-card__title">Pressure over time</h3>
-          <canvas id="chartPress"></canvas>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <span class="footer__name">Yannick Hogetoorn</span>
-      </div>
-    </div>
-  </footer>
-
-<script>
-  const formNote = document.getElementById('formNote');
-  const contactForm = document.getElementById('contactForm');
-
-  function showFormNote(message, isError = false) {
-    formNote.textContent = message;
-    formNote.classList.toggle('form-note--error', isError);
-  }
-
-  // Fetch the CSRF token when the page loads
-  fetch('PHP/sendMail.php?csrf=1')
-    .then(r => r.json())
-    .then(d => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = 'csrf_token';
-      input.value = d.token;
-      contactForm.appendChild(input);
-    })
-    .catch(() => {
-      showFormNote('Unable to load the contact form token. Refresh the page and try again.', true);
-    });
-
-  // Intercept the form submit and send it in the background
-  contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    showFormNote('');
-    const form = e.target;
-    const data = new FormData(form);
-
-    fetch('PHP/sendMail.php', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: data,
-    })
-      .then(async r => {
-        let result;
-        try {
-          result = await r.json();
-        } catch (err) {
-          throw new Error('Invalid response from server.');
-        }
-
-        if (!r.ok || !result.success) {
-          throw new Error(result.error || result.message || 'Unknown server error.');
-        }
-
-        window.location.href = 'index.html?mail=success';
-      })
-      .catch(error => {
-        showFormNote(`Send failed: ${error.message}`, true);
-      });
-  });
-</script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script src="/JS/server.js"></script>
+    </section>
+  </main>
 </body>
 </html>
